@@ -3,7 +3,19 @@ cmake_minimum_required(VERSION 3.30)
 project(FazonEngine 	VERSION 0.01
 						DESCRIPTION "My first game engine"
 						LANGUAGES CXX)
-						
+
+# Remove default build types and define custom ones
+set(CMAKE_CONFIGURATION_TYPES Debug Release Dist CACHE STRING "Available configurations" FORCE)
+
+# Set compiler flags for each configuration
+set(CMAKE_C_FLAGS_DEBUG "-g" CACHE STRING "Debug build compiler flags" FORCE)         # Enable debug symbols
+set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Release build compiler flags" FORCE) # Optimization for Release
+set(CMAKE_C_FLAGS_DIST "-O3 -DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)      # Maximum optimization for Dist
+
+set(CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING "Debug build compiler flags" FORCE)
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Release build compiler flags" FORCE)
+set(CMAKE_CXX_FLAGS_DIST "-O3 -DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)
+
 add_library(Fazon STATIC
 	Fazon/src/Fazon/Application.cpp
 	Fazon/src/Fazon/Application.h
@@ -38,8 +50,14 @@ if(WIN32)
 		FZ_PLATFORM_WINDOWS
 	)
 else()
-	message(FATAL_ERROR "Fazon Engine only supports 64-bit")
+	message(FATAL_ERROR "Fazon Engine only supports Windows")
 endif()
+
+target_compile_definitions(Fazon PUBLIC
+	$<$<CONFIG:Debug>:FZ_BUILD_DEBUG>
+	$<$<CONFIG:Release>:FZ_BUILD_RELEASE>
+	$<$<CONFIG:Dist>:FZ_BUILD_DIST>
+)
 
 target_include_directories(Sandbox PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/Fazon/src
