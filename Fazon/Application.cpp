@@ -1,5 +1,11 @@
-#include <iostream>
+#include "Application.h"
 
-void something(){
-	std::cout << "something\n";
+#include <print>
+
+namespace Fazon {
+
+	void print() {
+		std::println("Hello, world!");
+	}
+
 }

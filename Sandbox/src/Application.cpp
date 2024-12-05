@@ -1,5 +1,5 @@
-#include <iostream>
+#include "Application.h"
 
-void main(){
-	std::cout << "something\n";
+void main() {
+	Fazon::print();
 }

@@ -1,5 +1,7 @@
-#include <iostream>
+#pragma once
 
-void something(){
-	std::cout << "something\n";
+namespace Fazon {
+
+	void print();
+
 }
