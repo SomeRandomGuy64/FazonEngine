@@ -24,6 +24,11 @@ add_library(Fazon STATIC
 	Fazon/src/Fazon/Log.h
 	Fazon/src/Fazon/Log.cpp
 
+	Fazon/src/Fazon/Events/ApplicationEvent.h
+	Fazon/src/Fazon/Events/Event.h
+	Fazon/src/Fazon/Events/KeyEvent.h
+	Fazon/src/Fazon/Events/MouseEvent.h
+
 	Fazon/src/Fazon.h
 	)
 target_include_directories(Fazon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Fazon)
@@ -64,7 +69,6 @@ target_include_directories(Sandbox PUBLIC
 )
 
 find_package(Git QUIET)
-
 # Check if Git is available and the vendor directory contains submodules
 if (GIT_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/.git")
     # Update submodules as needed
@@ -73,19 +77,17 @@ if (GIT_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/.git")
         message(STATUS "Updating all submodules in Fazon/vendor")
         execute_process(
             COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor
             RESULT_VARIABLE GIT_SUBMOD_RESULT
         )
-        if (NOT GIT_SUBMOD_RESULT EQUAL "0")
+        if (NOT GIT_SUBMOD_RESULT EQUAL 0)
             message(FATAL_ERROR "git submodule update --init --recursive failed with ${GIT_SUBMOD_RESULT}, please check out submodules manually.")
         endif()
     endif()
 endif()
 
-# Verify all submodules in Fazon/vendor are present
-file(GLOB_RECURSE VENDOR_SUBMODULES "${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/*/.git")
-if (NOT VENDOR_SUBMODULES)
-    message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/spdlog/.git")
+    message(FATAL_ERROR "Submodules not properly initialized. Please run 'git submodule update --init --recursive'")
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/spdlog)
