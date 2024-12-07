@@ -89,4 +89,8 @@ namespace Fazon {
 
 	};
 
+	inline std::ostream& operator<<(std::ostream& os, const Event& event) {
+		return os << event.toString();
+	}
+
 }
