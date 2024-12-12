@@ -38,6 +38,7 @@ namespace Fazon {
 	#define FZ_DEBUG(...)			::Fazon::Log::getClientLogger()->debug(__VA_ARGS__)
 
 #else
+	// Core log macros
 	#define FZ_CORE_CRITICAL(...)
 	#define FZ_CORE_ERROR(...)
 	#define FZ_CORE_WARN(...)
