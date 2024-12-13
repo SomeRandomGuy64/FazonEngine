@@ -28,6 +28,7 @@ add_library(Fazon STATIC
 	Fazon/src/Fazon/Events/Event.h
 	Fazon/src/Fazon/Events/KeyEvent.h
 	Fazon/src/Fazon/Events/MouseEvent.h
+	Fazon/src/Fazon/Events/WindowEvent.h
 
 	Fazon/src/Fazon.h
 	)

@@ -10,30 +10,16 @@ namespace Fazon {
 	enum class EventType {
 
 		None = 0,
-
-		WindowClose,
-		WindowOpen,
-		WindowFocus,
-		WindowLostFocus,
-		WindowMoved,
-
-		AppTick,
-		AppUpdate,
-		AppRender,
-
-		KeyPressed,
-		KeyReleased,
-
-		MouseButtonPressed,
-		MouseButtonReleased,
-		MouseMoved,
-		MouseScrolled
+		WindowClose, WindowOpen, WindowFocus, WindowLostFocus, WindowMoved,
+		AppTick, AppUpdate, AppRender, 
+		KeyPressed, KeyReleased,
+		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 
 	};
 
 #define EVENT_CLASS_TYPE(type)	static EventType getStaticType() { return EventType::##type; }				\
 								virtual EventType getEventType() const override { return getStaticType(); }	\
-								virtual const char* getName() const override { return #type; }
+								virtual const char* getName() const override { return #type; }				\
 
 #define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
@@ -45,6 +31,7 @@ namespace Fazon {
 		EventCategoryKeyboard		= BIT(2),
 		EventCategoryMouse			= BIT(3),
 		EventCategoryMouseButton	= BIT(4),
+		EventCategoryWindow			= BIT(5),
 
 	};
 
