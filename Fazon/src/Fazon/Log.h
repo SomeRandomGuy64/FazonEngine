@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "Fazon/Core.h"
 #include <spdlog/spdlog.h>
 
