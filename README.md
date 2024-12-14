@@ -5,7 +5,11 @@ This engine will initially only be supported on Windows, although I plan to add 
 ## Building
 This engine uses CMake 3.30, earlier versions may work but have not been tested
 
-To clone this repository use ```git clone --recursive git@github.com:SomeRandomGuy64/FazonEngine.git``` or ```git clone --recursive https://github.com/SomeRandomGuy64/FazonEngine.git``` to make sure that you clone every git submodule too.
+To clone this repository use 
+```git clone --recursive git@github.com:SomeRandomGuy64/FazonEngine.git```
+or 
+```git clone --recursive https://github.com/SomeRandomGuy64/FazonEngine.git``` 
+to make sure that you clone every git submodule.
 
 First confirm you have CMake 3.30 installed. 
 This engine was made with Visual Studio 2022 using C++23, I can only guarentee the engine will work using this setup.
