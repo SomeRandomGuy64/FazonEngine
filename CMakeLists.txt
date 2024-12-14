@@ -36,6 +36,8 @@ add_library(Fazon STATIC
 
 	Fazon/src/Fazon.h
 	)
+
+target_precompile_headers(Fazon PUBLIC Fazon/src/Fazon/fzpch.h)
 target_include_directories(Fazon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Fazon)
 target_compile_features(Fazon PUBLIC cxx_std_23)
 target_compile_options(Fazon PRIVATE

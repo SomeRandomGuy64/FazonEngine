@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Fazon/Core.h"
-#include <type_traits>
 
 namespace Fazon {
 
