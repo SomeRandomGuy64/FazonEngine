@@ -7,14 +7,18 @@ project(FazonEngine 	VERSION 0.01
 # Remove default build types and define custom ones
 set(CMAKE_CONFIGURATION_TYPES Debug Release Dist CACHE STRING "Available configurations" FORCE)
 
-# Set compiler flags for each configuration
-set(CMAKE_C_FLAGS_DEBUG "-g" CACHE STRING "Debug build compiler flags" FORCE)         # Enable debug symbols
-set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Release build compiler flags" FORCE) # Optimization for Release
-set(CMAKE_C_FLAGS_DIST "-O3 -DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)      # Maximum optimization for Dist
-
-set(CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING "Debug build compiler flags" FORCE)
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Release build compiler flags" FORCE)
-set(CMAKE_CXX_FLAGS_DIST "-O3 -DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)
+# Set compiler flags based on the build type
+if(MSVC)
+  # Visual Studio compiler flags
+  set(CMAKE_CXX_FLAGS_DEBUG "/Zi /Od /D_DEBUG" CACHE STRING "Debug build compiler flags" FORCE)
+  set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG" CACHE STRING "Release build compiler flags" FORCE)
+  set(CMAKE_CXX_FLAGS_DIST "/O3 /DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)
+else()
+  # GCC/Clang compiler flags
+  set(CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING "Debug build compiler flags" FORCE)
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Release build compiler flags" FORCE)
+  set(CMAKE_CXX_FLAGS_DIST "-O3 -DNDEBUG" CACHE STRING "Dist build compiler flags" FORCE)
+endif()
 
 add_library(Fazon STATIC
 	Fazon/src/Fazon/Application.cpp
