@@ -2,8 +2,10 @@
 This is my first game engine, initially based on The Cherno's game engine series but I plan to diverge from that quite early one with plans to add networking, ray tracing and Vulkan support from the start.
 This engine will initially only be supported on Windows, although I plan to add Linux support at a later date. There are currently no plans for macOS support.
 
-## Building (I've yet to test out building on multiple PCs so these instructions may be incorrect)
+## Building
 This engine uses CMake 3.30, earlier versions may work but have not been tested
+
+To clone this repository use ```git clone --recursive git@github.com:SomeRandomGuy64/FazonEngine.git``` or ```git clone --recursive https://github.com/SomeRandomGuy64/FazonEngine.git``` to make sure that you clone every git submodule too.
 
 First confirm you have CMake 3.30 installed. 
 This engine was made with Visual Studio 2022 using C++23, I can only guarentee the engine will work using this setup.
