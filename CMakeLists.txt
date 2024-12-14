@@ -67,6 +67,10 @@ target_compile_definitions(Fazon PUBLIC
 
 target_include_directories(Sandbox PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/Fazon/src
+) 
+
+target_include_directories(Fazon PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}/Fazon/src
 )
 
 find_package(Git QUIET)
