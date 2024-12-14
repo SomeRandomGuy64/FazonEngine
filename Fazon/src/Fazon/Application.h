@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Fazon/Core.h"
 
 namespace Fazon {
 
