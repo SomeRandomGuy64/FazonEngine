@@ -33,7 +33,7 @@ namespace Fazon {
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseButtonPressed);
+		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
 	class MouseButtonReleasedEvent : public MouseButtonEvent {
@@ -50,12 +50,18 @@ namespace Fazon {
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseButtonReleased);
+		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 
 	class MouseMovedEvent : public Event {
 
 	public:
+		MouseMovedEvent(int xPosition, int yPosition)
+			: m_xPosition(xPosition)
+			, m_yPosition(yPosition)
+		{
+		}
+
 		inline int getXPosition() const { return m_xPosition; }
 		inline int getYPosition() const { return m_yPosition; }
 
@@ -68,11 +74,6 @@ namespace Fazon {
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput);
 		EVENT_CLASS_TYPE(MouseMoved)
 	private:
-		MouseMovedEvent(int xPosition, int yPosition)
-			: m_xPosition(xPosition)
-			, m_yPosition(yPosition)
-		{
-		}
 
 		int m_xPosition{};
 		int m_yPosition{};
@@ -88,6 +89,11 @@ namespace Fazon {
 	class MouseScrolledEvent : public Event {
 
 	public:
+		MouseScrolledEvent(MouseScrollDirection scrollDirection)
+			: m_scrollDirection(scrollDirection)
+		{
+		}
+
 		inline MouseScrollDirection getScrollDirection() const { return m_scrollDirection; }
 
 		std::string toString() const override {
@@ -98,13 +104,9 @@ namespace Fazon {
 		}
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput);
-		EVENT_CLASS_TYPE(MouseScrolled);
-	private:
-		MouseScrolledEvent(MouseScrollDirection scrollDirection)
-			: m_scrollDirection(scrollDirection)
-		{
-		}
+		EVENT_CLASS_TYPE(MouseScrolled)
 
+	private:
 		MouseScrollDirection m_scrollDirection{};
 	};
 }
