@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Fazon/Core.h"
+#include <type_traits>
 
 namespace Fazon {
 
@@ -65,7 +66,7 @@ namespace Fazon {
 		template<typename T>
 		bool dispatch(EventFn<T> func) {
 			if (m_event.getEventType() == T::getStaticType()) {
-				m_event.m_handled = func(*(T*)&m_event);
+				m_event.m_handled |= func(static_cast<T&>(m_event));
 				return true;
 			}
 			return false;
@@ -76,8 +77,13 @@ namespace Fazon {
 
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& event) {
-		return os << event.toString();
-	}
-
 }
+
+template <typename T>
+struct fmt::formatter<T, std::enable_if_t<std::is_base_of_v<Fazon::Event, T>, char>> :
+		fmt::formatter<std::string> {
+
+	auto format(const Fazon::Event& event, format_context& ctx) const {
+		return formatter<std::string>::format(event.toString(), ctx);
+	}
+};

@@ -4,6 +4,8 @@
 #include <functional>
 #include <sstream>
 
+#include <spdlog/fmt/fmt.h>
+
 #ifdef FZ_PLATFORM_WINDOWS
 	#pragma message("FZ_PLATFORM_WINDOWS is defined")
 #else

@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "Fazon/Core.h"
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 namespace Fazon {
 
@@ -35,6 +35,7 @@ namespace Fazon {
 	#define FZ_ERROR(...)			::Fazon::Log::getClientLogger()->error(__VA_ARGS__)
 	#define FZ_WARN(...)			::Fazon::Log::getClientLogger()->warn(__VA_ARGS__)
 	#define FZ_INFO(...)			::Fazon::Log::getClientLogger()->info(__VA_ARGS__)
+	#define FZ_TRACE(...)			::Fazon::Log::getClientLogger()->trace(__VA_ARGS__)
 	#define FZ_DEBUG(...)			::Fazon::Log::getClientLogger()->debug(__VA_ARGS__)
 
 #else
