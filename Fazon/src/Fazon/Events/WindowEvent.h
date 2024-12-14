@@ -105,4 +105,31 @@ namespace Fazon {
 		int m_yPosition{};
 	};
 
+	class WindowResizedEvent : public WindowEvent {
+
+	public:
+		WindowResizedEvent(int width, int height)
+			: m_width{ width }
+			, m_height{ height }
+		{
+		}
+
+		inline int getWidth() { return m_width; }
+		inline int getHeight() { return m_height; }
+
+		std::string toString() const override {
+			std::stringstream ss{};
+			ss << "WindowResizedEvent: Width: " << m_width << ", Height: " << m_height;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(WindowResized)
+
+	private:
+
+		int m_width{};
+		int m_height{};
+
+	};
+
 }

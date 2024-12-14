@@ -10,7 +10,7 @@ namespace Fazon {
 	enum class EventType {
 
 		None = 0,
-		WindowClose, WindowOpen, WindowFocus, WindowLostFocus, WindowMoved,
+		WindowClose, WindowOpen, WindowFocus, WindowLostFocus, WindowMoved, WindowResized,
 		AppTick, AppUpdate, AppRender, 
 		KeyPressed, KeyReleased,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
