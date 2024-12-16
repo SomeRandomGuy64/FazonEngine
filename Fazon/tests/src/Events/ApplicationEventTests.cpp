@@ -1,6 +1,5 @@
 #include <catch2/catch_all.hpp>
 #include <Fazon/Events/ApplicationEvent.h>
-#include <sstream>
 
 using namespace Fazon;
 
@@ -9,6 +8,7 @@ TEST_CASE("Application Event Basic Functionality", "[Application Events]") {
 	SECTION("AppTickEvent") {
 
 		AppTickEvent mockAppTickEvent{};
+
 		REQUIRE(mockAppTickEvent.getCategoryFlags() == EventCategoryApplication);
 		REQUIRE(mockAppTickEvent.isInCategory(EventCategoryApplication));
 		REQUIRE(mockAppTickEvent.getEventType() == EventType::AppTick);
