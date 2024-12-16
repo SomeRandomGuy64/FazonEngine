@@ -24,7 +24,7 @@ set_compiler_flags(Fazon)
 target_precompile_headers(Fazon PUBLIC src/Fazon/fzpch.h)
 
 # Include directories
-target_include_directories(Fazon PUBLIC 
+target_include_directories(Fazon PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
@@ -41,4 +41,9 @@ add_subdirectory(tests)
 add_subdirectory(vendor/spdlog)
 target_link_libraries(Fazon PUBLIC 
 	spdlog
+)
+
+find_package(GameNetworkingSockets CONFIG REQUIRED)
+target_link_libraries(Fazon PUBLIC 
+    GameNetworkingSockets::GameNetworkingSockets
 )
