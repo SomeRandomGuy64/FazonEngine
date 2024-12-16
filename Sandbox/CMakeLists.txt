@@ -10,7 +10,6 @@ set_compiler_flags(Sandbox)
 # Link Fazon library and Catch2
 target_link_libraries(Sandbox PUBLIC 
     Fazon
-    Catch2
 )
 
 # Include directories

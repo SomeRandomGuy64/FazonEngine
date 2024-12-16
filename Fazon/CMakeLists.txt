@@ -34,9 +34,11 @@ target_compile_definitions(Fazon PUBLIC
     FAZON_VERSION="0.01"
 )
 
+# Test project
+add_subdirectory(tests)
+
 # Vendor dependencies
 add_subdirectory(vendor/spdlog)
 target_link_libraries(Fazon PUBLIC 
 	spdlog
-	Catch2
 )
