@@ -29,8 +29,8 @@ target_include_directories(Fazon PUBLIC
 )
 
 # Compiler features and definitions
-target_compile_features(Fazon PUBLIC cxx_std_23)
-target_compile_definitions(Fazon PUBLIC 
+target_compile_features(Fazon PRIVATE cxx_std_23)
+target_compile_definitions(Fazon PRIVATE 
     FAZON_VERSION="0.01"
 )
 

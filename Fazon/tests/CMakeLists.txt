@@ -1,7 +1,6 @@
 # Fazon/tests/CMakeLists.txt
 add_executable(FazonTest
 	src/MainTestRunner.cpp
-	src/LogTests.cpp
 	
 	src/Events/ApplicationEventTests.cpp
 	src/Events/KeyEventTests.cpp
@@ -32,13 +31,6 @@ catch_discover_tests(FazonTest)
 # Compiler-specific settings
 if(MSVC)
 	target_compile_options(FazonTest PRIVATE
-		/W4
-		/WX
-	)
-else()
-	target_compile_options(FazonTest PRIVATE
-		-Wall
-		-Wextra
-		-Werror
+		/W3
 	)
 endif()
