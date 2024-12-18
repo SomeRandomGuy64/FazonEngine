@@ -4,3 +4,6 @@
 [submodule "vendor/catch2"]
 	path = vendor/catch2
 	url = git@github.com:catchorg/Catch2.git
+[submodule "Fazon/vendor/GameNetworkingSockets"]
+	path = Fazon/vendor/GameNetworkingSockets
+	url = git@github.com:ValveSoftware/GameNetworkingSockets.git
