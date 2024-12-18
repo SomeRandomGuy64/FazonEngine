@@ -2,7 +2,7 @@
 This is my first game engine, initially based on The Cherno's game engine series but I plan to diverge from that quite early one with plans to add networking, ray tracing and Vulkan support from the start.
 This engine will initially only be supported on Windows, although I plan to add Linux support at a later date. There are currently no plans for macOS support.
 
-## Building
+## Building (not yet tested as of GameNetworkingSockets being added)
 This engine uses CMake 3.30, earlier versions may work but have not been tested
 
 To clone this repository use 
