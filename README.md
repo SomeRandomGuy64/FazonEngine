@@ -1,8 +1,8 @@
 # FazonEngine
-This is my first game engine, initially based on The Cherno's game engine series but I plan to diverge from that quite early one with plans to add networking, ray tracing and Vulkan support from the start.
-This engine will initially only be supported on Windows, although I plan to add Linux support at a later date. There are currently no plans for macOS support.
+This is my first game engine, initially based on The Cherno's game engine series but I plan to diverge from that quite early one with plans to implement my own physics engine, map editor, sprite editor and shading language.
+This engine will initially only be supported on Windows, although I plan to add Linux support at a later date. macOS support is planned for the (far) future but will have to wait until I can get my hands on a Mac mini, macOS will **only** support the Metal rendering API.
 
-## Building (not yet tested as of GameNetworkingSockets being added)
+## Building (not yet tested)
 This engine uses CMake 3.30, earlier versions may work but have not been tested
 
 To clone this repository use 
