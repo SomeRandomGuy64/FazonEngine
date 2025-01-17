@@ -35,7 +35,6 @@ endfunction()
 function(validate_critical_submodules)
     set(CRITICAL_SUBMODULES
         "${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/spdlog/.git"
-		"${CMAKE_CURRENT_SOURCE_DIR}/Fazon/vendor/gamenetworkingsockets/.git"
         "${CMAKE_CURRENT_SOURCE_DIR}/vendor/catch2/.git"
     )
 

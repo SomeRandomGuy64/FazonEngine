@@ -42,8 +42,3 @@ add_subdirectory(vendor/spdlog)
 target_link_libraries(Fazon PUBLIC 
 	spdlog
 )
-
-find_package(GameNetworkingSockets CONFIG REQUIRED)
-target_link_libraries(Fazon PUBLIC 
-    GameNetworkingSockets::GameNetworkingSockets
-)
