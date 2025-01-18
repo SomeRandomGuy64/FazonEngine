@@ -9,8 +9,10 @@ add_executable(FazonTest
 )
 
 # Link against Fazon library and Catch2
+set(SPDLOG_FMT_EXTERNAL OFF CACHE BOOL "Use external fmt library instead of bundled" FORCE)
 target_link_libraries(FazonTest PRIVATE
 	Fazon
+	spdlog
 	Catch2::Catch2WithMain
 )
 
