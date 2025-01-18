@@ -20,4 +20,8 @@ add_subdirectory(Fazon)
 add_subdirectory(Sandbox)
 
 # Add vendor targets
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 add_subdirectory(vendor/catch2)
+set_target_properties(Catch2 PROPERTIES FOLDER "Dependencies")
+set_target_properties(Catch2WithMain PROPERTIES FOLDER "Dependencies")

@@ -82,14 +82,14 @@ namespace Fazon {
 	class WindowMovedEvent : public WindowEvent {
 
 	public:
-		WindowMovedEvent(int xPosition, int yPosition)
+		WindowMovedEvent(int32_t xPosition, int32_t yPosition)
 			: m_xPosition{ xPosition }
 			, m_yPosition{ yPosition }
 		{
 		}
 
-		inline int getXPosition() { return m_xPosition; }
-		inline int getYPosition() { return m_yPosition; }
+		inline int32_t getXPosition() { return m_xPosition; }
+		inline int32_t getYPosition() { return m_yPosition; }
 
 		std::string toString() const override {
 			std::stringstream ss{};
@@ -101,21 +101,21 @@ namespace Fazon {
 
 	private:
 
-		int m_xPosition{};
-		int m_yPosition{};
+		int32_t m_xPosition{};
+		int32_t m_yPosition{};
 	};
 
 	class WindowResizedEvent : public WindowEvent {
 
 	public:
-		WindowResizedEvent(int width, int height)
+		WindowResizedEvent(int32_t width, int32_t height)
 			: m_width{ width }
 			, m_height{ height }
 		{
 		}
 
-		inline int getWidth() { return m_width; }
-		inline int getHeight() { return m_height; }
+		inline int32_t getWidth() { return m_width; }
+		inline int32_t getHeight() { return m_height; }
 
 		std::string toString() const override {
 			std::stringstream ss{};

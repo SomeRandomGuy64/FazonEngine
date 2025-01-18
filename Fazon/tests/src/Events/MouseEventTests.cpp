@@ -79,8 +79,8 @@ TEST_CASE("Mouse Event Basic Functionality", "[Mouse Events]") {
 	SECTION("MouseScrolled") {
 
 		MouseScrollDirection scrollDirections{};
-		scrollDirections.vertical = 10.0f;
-		scrollDirections.horizontal = 0.0f;
+		scrollDirections.m_yOffset = 10.0f;
+		scrollDirections.m_xOffset = 0.0f;
 
 		MouseScrolledEvent mockScroll{ scrollDirections };
 
@@ -102,8 +102,8 @@ TEST_CASE("Mouse Event Basic Functionality", "[Mouse Events]") {
 		REQUIRE(mockScroll.toString() == "MouseScrolledEvent: Vertical: 10, Horizontal: 0");
 
 		MouseScrollDirection negativeDirections{};
-		negativeDirections.vertical = -5.0f;
-		negativeDirections.horizontal = -2.5f;
+		negativeDirections.m_yOffset = -5.0f;
+		negativeDirections.m_xOffset = -2.5f;
 
 		MouseScrolledEvent mockNegativeScroll{ negativeDirections };
 

@@ -22,7 +22,7 @@ namespace Fazon {
 	class KeyPressedEvent : public KeyEvent {
 
 	public:
-		KeyPressedEvent(int keycode, int repeatCount)
+		KeyPressedEvent(uint32_t keycode, uint32_t repeatCount)
 			: KeyEvent(keycode)
 			, m_repeatCount(repeatCount)
 		{
@@ -45,7 +45,7 @@ namespace Fazon {
 	class KeyReleasedEvent : public KeyEvent {
 
 	public:
-		KeyReleasedEvent(int keycode)
+		KeyReleasedEvent(uint32_t keycode)
 			: KeyEvent(keycode)
 		{
 		}

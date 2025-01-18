@@ -7,22 +7,22 @@ namespace Fazon {
 	class MouseButtonEvent : public Event {
 
 	public:
-		inline int getMouseButtonCode() const { return m_mouseButtonCode; }
+		inline uint32_t getMouseButtonCode() const { return m_mouseButtonCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryMouseButton | EventCategoryInput);
 	protected:
-		MouseButtonEvent(int mouseButtonCode)
+		MouseButtonEvent(uint32_t mouseButtonCode)
 			: m_mouseButtonCode(mouseButtonCode)
 		{
 		}
 
-		int m_mouseButtonCode{};
+		uint32_t m_mouseButtonCode{};
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent {
 
 	public:
-		MouseButtonPressedEvent(int mouseButtonCode)
+		MouseButtonPressedEvent(uint32_t mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
 		}
@@ -39,7 +39,7 @@ namespace Fazon {
 	class MouseButtonReleasedEvent : public MouseButtonEvent {
 
 	public:
-		MouseButtonReleasedEvent(int mouseButtonCode)
+		MouseButtonReleasedEvent(uint32_t mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
 		}
@@ -56,14 +56,14 @@ namespace Fazon {
 	class MouseMovedEvent : public Event {
 
 	public:
-		MouseMovedEvent(int xPosition, int yPosition)
+		MouseMovedEvent(float xPosition, float yPosition)
 			: m_xPosition(xPosition)
 			, m_yPosition(yPosition)
 		{
 		}
 
-		inline int getXPosition() const { return m_xPosition; }
-		inline int getYPosition() const { return m_yPosition; }
+		inline float getXPosition() const { return m_xPosition; }
+		inline float getYPosition() const { return m_yPosition; }
 
 		std::string toString() const override {
 			std::stringstream ss{};
@@ -75,15 +75,24 @@ namespace Fazon {
 		EVENT_CLASS_TYPE(MouseMoved)
 	private:
 
-		int m_xPosition{};
-		int m_yPosition{};
+		float m_xPosition{};
+		float m_yPosition{};
 	};
 
 	struct MouseScrollDirection {
+		
+		MouseScrollDirection() = default;
+
+		MouseScrollDirection(float yOffset, float xOffset = 0.0f)
+			: m_yOffset{ yOffset }
+			, m_xOffset{ xOffset }
+		{}
+
 		// a positive value shows upwards scrolling, a negative value shows downwards scrolling
-		float vertical{};
+		float m_yOffset{};
 		// a positive value show scrolling to the right, a negative value shows scrolling to the left
-		float horizontal{};
+		float m_xOffset{};
+
 	};
 
 	class MouseScrolledEvent : public Event {
@@ -98,8 +107,8 @@ namespace Fazon {
 
 		std::string toString() const override {
 			std::stringstream ss{};
-			ss << "MouseScrolledEvent: Vertical: " << m_scrollDirection.vertical 
-			   << ", Horizontal: " << m_scrollDirection.horizontal;
+			ss << "MouseScrolledEvent: Vertical: " << m_scrollDirection.m_yOffset 
+			   << ", Horizontal: " << m_scrollDirection.m_xOffset;
 			return ss.str();
 		}
 

@@ -4,3 +4,9 @@
 [submodule "vendor/catch2"]
 	path = vendor/catch2
 	url = git@github.com:catchorg/Catch2.git
+[submodule "Fazon/vendor/SDL"]
+	path = Fazon/vendor/SDL
+	url = git@github.com:libsdl-org/SDL.git
+[submodule "Fazon/vendor/fmt"]
+	path = Fazon/vendor/fmt
+	url = git@github.com:fmtlib/fmt.git
