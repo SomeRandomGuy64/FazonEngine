@@ -2,6 +2,7 @@
 
 #include "Fazon/fzpch.h"
 #include "Fazon/Core.h"
+#include "Events/WindowEvent.h"
 #include "Window.h"
 
 namespace Fazon {
@@ -14,7 +15,11 @@ namespace Fazon {
 
 		void run();
 
+		void onEvent(Event& e);
+
 	private:
+		bool onWindowClosed(WindowCloseEvent& event);
+
 		std::unique_ptr<Window> m_window;
 		bool m_running{ true };
 

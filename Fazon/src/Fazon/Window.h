@@ -42,6 +42,18 @@ namespace Fazon {
 
 		static Window* create(const WindowProps& props = WindowProps());
 
+	protected:
+		virtual void m_resizeWindowEvent() = 0;
+		virtual void m_closeWindowEvent() = 0;
+		virtual void m_windowMovedEvent() = 0;
+		virtual void m_windowFocusEvent() = 0;
+		virtual void m_windowLostFocusEvent() = 0;
+		virtual void m_keyPressEvent() = 0;
+		virtual void m_mouseButtonPressEvent() = 0;
+		virtual void m_mouseScrollEvent() = 0;
+		virtual void m_mouseMoveEvent() = 0;
+		virtual void m_printError(const char* error) = 0;
+
 	};
 
 }

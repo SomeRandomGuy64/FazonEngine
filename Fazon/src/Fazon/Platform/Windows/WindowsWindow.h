@@ -3,7 +3,7 @@
 #include "Fazon/fzpch.h"
 #include "Fazon/Window.h"
 
-#include <SDL3/SDL_video.h>
+#include <SDL3/SDL.h>
 
 namespace Fazon {
 
@@ -24,8 +24,19 @@ namespace Fazon {
 		bool isVSync() const override;
 
 	private:
-		virtual void init(const WindowProps& props);
-		virtual void shutdown();
+		void init(const WindowProps& props);
+		void shutdown();
+
+		void m_resizeWindowEvent() override;
+		void m_closeWindowEvent() override;
+		void m_windowMovedEvent() override;
+		void m_windowFocusEvent() override;
+		void m_windowLostFocusEvent() override;
+		void m_keyPressEvent() override;
+		void m_mouseButtonPressEvent() override;
+		void m_mouseScrollEvent() override;
+		void m_mouseMoveEvent() override;
+		void m_printError(const char* error) override;
 
 	private:
 		SDL_Window* m_window;
@@ -33,16 +44,17 @@ namespace Fazon {
 		struct WindowData {
 
 			std::string title;
-			uint32_t width;
-			uint32_t height;
+			int32_t width;
+			int32_t height;
 			bool vSync;
-			SDL_GLContext context;
 
 			EventCallbackFn EventCallback;
 
 		};
 
 		WindowData m_data{};
+		SDL_Event m_sdlEvent;
+		SDL_GLContext m_glContext;
 
 	};
 
