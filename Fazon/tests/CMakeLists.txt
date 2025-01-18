@@ -8,6 +8,17 @@ add_executable(FazonTest
 	src/Events/WindowEventTests.cpp
 )
 
+source_group("Tests" FILES
+    src/MainTestRunner.cpp
+)
+
+source_group("Tests\\Events" FILES
+    src/Events/ApplicationEventTests.cpp
+    src/Events/KeyEventTests.cpp
+    src/Events/MouseEventTests.cpp
+    src/Events/WindowEventTests.cpp
+)
+
 # Link against Fazon library and Catch2
 set(SPDLOG_FMT_EXTERNAL OFF CACHE BOOL "Use external fmt library instead of bundled" FORCE)
 target_link_libraries(FazonTest PRIVATE
@@ -36,3 +47,16 @@ if(MSVC)
 		/W3
 	)
 endif()
+
+# Hide CMake generated files
+set_target_properties(FazonTest PROPERTIES 
+    VS_JUST_MY_CODE_DEBUGGING ON
+    EXCLUDE_FROM_ALL_BOM TRUE
+)
+
+source_group("CMake Generated Files" FILES 
+    "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/FazonTest.dir/Debug/cmake_pch.hxx"
+    "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/FazonTest.dir/Release/cmake_pch.hxx"
+    "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/FazonTest.dir/Dist/cmake_pch.hxx"
+    "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/FazonTest.dir/cmake_pch.cxx"
+)
