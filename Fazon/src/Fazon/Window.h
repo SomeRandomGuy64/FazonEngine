@@ -9,14 +9,14 @@ namespace Fazon {
 
 	struct WindowProps {
 
-		WindowProps(const std::string& title = "Fazon Engine", uint32_t width = 1280, uint32_t height = 720)
+		WindowProps(const char* title = "Fazon Engine", uint32_t width = 1280, uint32_t height = 720)
 			: m_title{ title }
 			, m_width{ width }
 			, m_height{ height }
 		{
 		}
 
-		std::string m_title;
+		const char* m_title;
 		uint32_t m_width;
 		uint32_t m_height;
 
