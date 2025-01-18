@@ -11,8 +11,9 @@ set_compiler_flags(Sandbox)
 target_compile_features(Sandbox PRIVATE cxx_std_23)
 
 # Link Fazon library and Catch2
-target_link_libraries(Sandbox PUBLIC 
+target_link_libraries(Sandbox PRIVATE
     Fazon
+	spdlog
 )
 
 # Include directories

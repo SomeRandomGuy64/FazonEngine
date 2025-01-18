@@ -2,7 +2,7 @@
 
 #include "Fazon/fzpch.h"
 
-#include <spdlog/fmt/fmt.h>
+#include <spdlog/fmt/bundled/format.h>
 
 #ifdef FZ_PLATFORM_WINDOWS
 	#pragma message("FZ_PLATFORM_WINDOWS is defined")
