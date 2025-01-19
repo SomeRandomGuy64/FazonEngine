@@ -84,17 +84,25 @@ set(SDL3_INCLUDE_DIR "${SDL3_DIR}/include")
 set(SDL3_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
 include_directories(${SDL3_INCLUDE_DIR})
 
+set(GLAD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad")
+set(GLAD_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/glad")
+set(GLAD_INCLUDE_DIR "${GLAD_DIR}/include")
+include_directories(${GLAD_INCLUDE_DIR})
+
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/SDL)
+add_subdirectory(vendor/glad)
 
 set_target_properties(spdlog PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL3-shared PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL_uclibc PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL3_test PROPERTIES FOLDER "Dependencies")
+set_target_properties(glad PROPERTIES FOLDER "Dependencies")
 
 target_link_libraries(Fazon PRIVATE 
     spdlog
     "${SDL3_LIB_DIR}/SDL3.lib"
+	"${GLAD_LIB_DIR}/glad.lilb"
 )
 
 # Hide CMake generated files
