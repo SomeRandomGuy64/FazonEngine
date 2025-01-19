@@ -102,7 +102,7 @@ set_target_properties(glad PROPERTIES FOLDER "Dependencies")
 target_link_libraries(Fazon PRIVATE 
     spdlog
     "${SDL3_LIB_DIR}/SDL3.lib"
-	"${GLAD_LIB_DIR}/glad.lilb"
+	"${GLAD_LIB_DIR}/glad.lib"
 )
 
 # Hide CMake generated files
