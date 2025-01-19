@@ -17,6 +17,11 @@ add_library(Fazon STATIC
     src/Fazon/Platform/Windows/WindowsWindow.cpp
     src/Fazon/Platform/Windows/WindowsWindow.h
 
+    src/Fazon/Layer.cpp
+    src/Fazon/Layer.h
+    src/Fazon/LayerStack.cpp
+    src/Fazon/LayerStack.h
+
     src/Fazon.h
 )
 
@@ -30,6 +35,10 @@ source_group("Fazon" FILES
     src/Fazon/Window.h
     src/Fazon.h
 	src/fzpch.h
+    src/Fazon/Layer.cpp
+    src/Fazon/Layer.h
+    src/Fazon/LayerStack.cpp
+    src/Fazon/LayerStack.h
 )
 
 source_group("Fazon\\Events" FILES

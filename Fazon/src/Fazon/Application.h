@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Fazon/fzpch.h"
 #include "Fazon/Core.h"
-#include "Events/WindowEvent.h"
+
 #include "Window.h"
+#include "Fazon/LayerStack.h"
+#include "Events/WindowEvent.h"
 
 namespace Fazon {
 
@@ -17,11 +18,15 @@ namespace Fazon {
 
 		void onEvent(Event& e);
 
+		void pushLayer(Layer* layer);
+		void pushOverlay(Layer* layer);
+
 	private:
-		bool onWindowClosed(WindowCloseEvent& event);
+		bool m_onWindowClosed(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
 		bool m_running{ true };
+		LayerStack m_layerStack;
 
 	};
 
