@@ -23,5 +23,8 @@ add_subdirectory(Sandbox)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(vendor/catch2)
+add_subdirectory(vendor/imgui)
+
+set_target_properties(ImGui PROPERTIES FOLDER "Dependencies")
 set_target_properties(Catch2 PROPERTIES FOLDER "Dependencies")
 set_target_properties(Catch2WithMain PROPERTIES FOLDER "Dependencies")
