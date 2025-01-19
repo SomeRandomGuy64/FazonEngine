@@ -3,8 +3,6 @@
 
 #include "Fazon/Events/WindowEvent.h"
 
-#include <SDL3/SDL_opengl.h>
-
 namespace Fazon {
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)

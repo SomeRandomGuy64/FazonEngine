@@ -6,6 +6,8 @@
 #include "Fazon/Events/KeyEvent.h"
 #include "Fazon/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 // update later to remove OpenGL specific stuff
 
 namespace Fazon {
@@ -59,6 +61,10 @@ namespace Fazon {
 		// OpenGL specific
 		m_glContext = SDL_GL_CreateContext(m_window);
 		SDL_GL_MakeCurrent(m_window, m_glContext);
+
+		int status{ gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) };
+		FZ_CORE_ASSERT(status, "Failed to initialise GLAD!");
+
 		m_printError(SDL_GetError());
 		setVSync(true);
 
