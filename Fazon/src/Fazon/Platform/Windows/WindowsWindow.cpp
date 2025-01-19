@@ -10,8 +10,6 @@
 
 namespace Fazon {
 
-	#define PRINT_SDL_ERROR() m_printError(SDL_GetError())
-
 	static bool s_SDLInitialised{ false };
 
 	Window* Window::create(const WindowProps& props) {
@@ -47,7 +45,7 @@ namespace Fazon {
 		if (!s_SDLInitialised) {
 			[[maybe_unused]]bool success{ SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) };
 			FZ_CORE_ASSERT(success, "Could not initialise SDL!");
-			PRINT_SDL_ERROR();
+			m_printError(SDL_GetError());
 			s_SDLInitialised = true;
 		}
 
@@ -61,7 +59,7 @@ namespace Fazon {
 		// OpenGL specific
 		m_glContext = SDL_GL_CreateContext(m_window);
 		SDL_GL_MakeCurrent(m_window, m_glContext);
-		PRINT_SDL_ERROR();
+		m_printError(SDL_GetError());
 		setVSync(true);
 
 	}
@@ -116,7 +114,7 @@ namespace Fazon {
 
 			// OpenGL
 			SDL_GetWindowSizeInPixels(m_window, &width, &height);
-			PRINT_SDL_ERROR();
+			m_printError(SDL_GetError());
 
 			m_data.width = width;
 			m_data.height = height;
@@ -214,7 +212,7 @@ namespace Fazon {
 		float yPos{};
 		if (m_sdlEvent.type == SDL_EVENT_MOUSE_MOTION) {
 			SDL_GetMouseState(&xPos, &yPos);
-			PRINT_SDL_ERROR();
+			m_printError(SDL_GetError());
 
 			MouseMovedEvent event{ xPos, yPos };
 			m_data.EventCallback(event);
