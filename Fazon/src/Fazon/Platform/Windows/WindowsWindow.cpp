@@ -98,10 +98,10 @@ namespace Fazon {
 	void WindowsWindow::setVSync(bool enabled) {
 
 		if (enabled) {
-			SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "1", SDL_HINT_OVERRIDE);
+			SDL_GL_SetSwapInterval(1);
 		}
 		else {
-			SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "0", SDL_HINT_OVERRIDE);
+			SDL_GL_SetSwapInterval(0);
 		}
 
 		m_data.vSync = enabled;

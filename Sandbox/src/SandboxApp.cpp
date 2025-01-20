@@ -23,7 +23,8 @@ class Sandbox : public Fazon::Application {
 public:
 	Sandbox() 
 	{
-		pushLayer(new ExampleLayer());
+		//pushLayer(new ExampleLayer());
+		pushLayer(new Fazon::ImGuiLayer());
 	}
 
 	~Sandbox() 

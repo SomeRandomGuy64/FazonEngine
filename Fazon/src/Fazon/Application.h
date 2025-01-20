@@ -21,12 +21,19 @@ namespace Fazon {
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* layer);
 
+		inline Window& getWindow() { return *m_window; }
+
+		inline static Application& get() { return *s_Instance; }
+
 	private:
 		bool m_onWindowClosed(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
 		bool m_running{ true };
 		LayerStack m_layerStack;
+
+	private:
+		static Application* s_Instance;
 
 	};
 

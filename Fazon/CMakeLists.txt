@@ -22,6 +22,12 @@ add_library(Fazon STATIC
     src/Fazon/LayerStack.cpp
     src/Fazon/LayerStack.h
 
+	src/Fazon/ImGui/ImGuiLayer.h
+	src/Fazon/ImGui/ImGuiLayer.cpp
+	
+	src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
+    src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
+
     src/Fazon.h
 )
 
@@ -49,9 +55,19 @@ source_group("Fazon\\Events" FILES
     src/Fazon/Events/WindowEvent.h
 )
 
+source_group("Fazon\\ImGui" FILES
+	src/Fazon/ImGui/ImGuiLayer.h
+	src/Fazon/ImGui/ImGuiLayer.cpp
+)
+
 source_group("Fazon\\Platform\\Windows" FILES
     src/Fazon/Platform/Windows/WindowsWindow.cpp
     src/Fazon/Platform/Windows/WindowsWindow.h
+)
+
+source_group("Fazon\\Platform\\OpenGL" FILES
+    src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
+    src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
 )
 
 # Include project-wide compiler options function
@@ -89,6 +105,11 @@ set(GLAD_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/glad")
 set(GLAD_INCLUDE_DIR "${GLAD_DIR}/include")
 include_directories(${GLAD_INCLUDE_DIR})
 
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/vendor/imgui")
+set(IMGUI_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/ImGui")
+set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
+include_directories(${IMGUI_DIR})
+
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/SDL)
 add_subdirectory(vendor/glad)
@@ -103,6 +124,7 @@ target_link_libraries(Fazon PRIVATE
     spdlog
     "${SDL3_LIB_DIR}/SDL3.lib"
 	"${GLAD_LIB_DIR}/glad.lib"
+	"${IMGUI_LIB_DIR}/ImGui.lib"
 )
 
 # Hide CMake generated files
