@@ -7,8 +7,13 @@ namespace Fazon {
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application() 
 	{
+		FZ_CORE_ASSERT(s_Instance == nullptr, "Application already exists!");
+		s_Instance = this;
+
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 	}
@@ -18,7 +23,10 @@ namespace Fazon {
 	}
 
 	void Application::pushLayer(Layer* layer) {
+
 		m_layerStack.pushLayer(layer);
+		layer->onAttach();
+
 	}
 
 	void Application::pushOverlay(Layer* overlay) {
