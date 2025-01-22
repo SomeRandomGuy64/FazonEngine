@@ -7,7 +7,7 @@ namespace Fazon {
 	class MouseButtonEvent : public Event {
 
 	public:
-		inline uint32_t getMouseButtonCode() const { return m_mouseButtonCode; }
+		inline uint32_t getMouseButtonCode() const { return m_mouseButtonCode - 1; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryMouseButton | EventCategoryInput);
 	protected:
