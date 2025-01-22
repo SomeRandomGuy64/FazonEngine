@@ -57,6 +57,8 @@ namespace Fazon {
 			static_cast<int>(props.m_height), 
 			SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
 		);
+
+		
 		
 		// OpenGL specific
 		m_glContext = SDL_GL_CreateContext(m_window);
@@ -73,6 +75,7 @@ namespace Fazon {
 	void WindowsWindow::shutdown() {
 		SDL_GL_DestroyContext(m_glContext);
 		SDL_DestroyWindow(m_window);
+		SDL_Quit();
 	}
 
 	void WindowsWindow::onUpdate() {
