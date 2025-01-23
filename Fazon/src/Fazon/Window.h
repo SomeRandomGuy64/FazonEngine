@@ -49,6 +49,7 @@ namespace Fazon {
 		virtual void m_windowFocusEvent() = 0;
 		virtual void m_windowLostFocusEvent() = 0;
 		virtual void m_keyPressEvent() = 0;
+		virtual void m_keyTypeEvent() = 0;
 		virtual void m_mouseButtonPressEvent() = 0;
 		virtual void m_mouseScrollEvent() = 0;
 		virtual void m_mouseMoveEvent() = 0;

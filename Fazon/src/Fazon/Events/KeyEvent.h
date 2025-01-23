@@ -7,28 +7,28 @@ namespace Fazon {
 	class KeyEvent : public Event {
 
 	public:
-		inline int getKeyCode() const { return m_keyCode; }
+		inline KeyCode getKeyCode() const { return m_keyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		KeyEvent(int keycode)
+		KeyEvent(KeyCode keycode)
 			: m_keyCode(keycode)
 		{
 		}
 
-		int m_keyCode{};
+		KeyCode m_keyCode{};
 	};
 
 	class KeyPressedEvent : public KeyEvent {
 
 	public:
-		KeyPressedEvent(uint32_t keycode, uint32_t repeatCount)
+		KeyPressedEvent(KeyCode keycode, uint32_t repeatCount)
 			: KeyEvent(keycode)
 			, m_repeatCount(repeatCount)
 		{
 		}
 
-		inline int getRepeatCount() const { return m_repeatCount; }
+		inline uint32_t getRepeatCount() const { return m_repeatCount; }
 
 		std::string toString() const override {
 			std::stringstream ss{};
@@ -45,7 +45,7 @@ namespace Fazon {
 	class KeyReleasedEvent : public KeyEvent {
 
 	public:
-		KeyReleasedEvent(uint32_t keycode)
+		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode)
 		{
 		}
@@ -57,6 +57,24 @@ namespace Fazon {
 		}
 
 		EVENT_CLASS_TYPE(KeyReleased)
+	};
+
+	class KeyTypedEvent : public KeyEvent {
+
+	public:
+		KeyTypedEvent(KeyCode keycode)
+			: KeyEvent(keycode)
+		{
+		}
+
+		std::string toString() const override {
+			std::stringstream ss{};
+			ss << "KeyTypedEvent: " << m_keyCode;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped)
+
 	};
 
 }

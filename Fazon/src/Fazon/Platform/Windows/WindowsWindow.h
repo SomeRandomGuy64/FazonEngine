@@ -24,8 +24,10 @@ namespace Fazon {
 		bool isVSync() const override;
 
 	private:
-		void init(const WindowProps& props);
-		void shutdown();
+		void m_init(const WindowProps& props);
+		void m_shutdown();
+
+		KeyCode m_convertSDLToFazonKeyCode(SDL_Keycode sdlKeycode);
 
 		void m_resizeWindowEvent() override;
 		void m_closeWindowEvent() override;
@@ -33,6 +35,7 @@ namespace Fazon {
 		void m_windowFocusEvent() override;
 		void m_windowLostFocusEvent() override;
 		void m_keyPressEvent() override;
+		void m_keyTypeEvent() override;
 		void m_mouseButtonPressEvent() override;
 		void m_mouseScrollEvent() override;
 		void m_mouseMoveEvent() override;

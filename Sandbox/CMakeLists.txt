@@ -18,6 +18,7 @@ target_compile_features(Sandbox PRIVATE cxx_std_23)
 target_link_libraries(Sandbox PRIVATE
     Fazon
 	spdlog
+	ImGui
 )
 
 # Include directories
