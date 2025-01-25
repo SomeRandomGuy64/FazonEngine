@@ -6,6 +6,10 @@ add_library(Fazon STATIC
     src/Fazon/EntryPoint.h
     src/Fazon/Log.h
     src/Fazon/Log.cpp
+	
+    src/Fazon/KeyCodes.h
+    src/Fazon/ScanCodes.h
+    src/Fazon/MouseCodes.h
 
     src/Fazon/Events/ApplicationEvent.h
     src/Fazon/Events/Event.h
@@ -27,6 +31,9 @@ add_library(Fazon STATIC
 	
 	src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
+	
+    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.cpp
+    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.h
 
     src/Fazon.h
 )
@@ -45,6 +52,9 @@ source_group("Fazon" FILES
     src/Fazon/Layer.h
     src/Fazon/LayerStack.cpp
     src/Fazon/LayerStack.h
+    src/Fazon/KeyCodes.h
+    src/Fazon/ScanCodes.h
+    src/Fazon/MouseCodes.h
 )
 
 source_group("Fazon\\Events" FILES
@@ -68,6 +78,9 @@ source_group("Fazon\\Platform\\Windows" FILES
 source_group("Fazon\\Platform\\OpenGL" FILES
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
+	
+	src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.cpp
+    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.h
 )
 
 # Include project-wide compiler options function

@@ -10,6 +10,6 @@
 [submodule "Fazon/vendor/fmt"]
 	path = Fazon/vendor/fmt
 	url = git@github.com:fmtlib/fmt.git
-[submodule "vendor/imgui/imgui"]
-	path = vendor/imgui/imgui
+[submodule "vendor/imgui"]
+	path = vendor/imgui
 	url = git@github.com:SomeRandomGuy64/imgui.git
