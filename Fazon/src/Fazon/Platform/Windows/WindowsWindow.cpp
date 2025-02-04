@@ -179,16 +179,16 @@ namespace Fazon {
 
 		if (m_sdlEvent.type == SDL_EVENT_KEY_DOWN) {
 			if (m_sdlEvent.key.repeat) {
-				KeyPressedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key.key), 1 };
+				KeyPressedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key), 1 };
 				m_data.EventCallback(event);
 			}
 			else {
-				KeyPressedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key.key), 0 };
+				KeyPressedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key), 0 };
 				m_data.EventCallback(event);
 			}
 		}
 		else if (m_sdlEvent.type == SDL_EVENT_KEY_UP) {
-			KeyReleasedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key.key) };
+			KeyReleasedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key) };
 			m_data.EventCallback(event);
 		}
 
@@ -197,7 +197,7 @@ namespace Fazon {
 	void WindowsWindow::m_keyTypeEvent() {
 		
 		if (m_sdlEvent.type == SDL_EVENT_KEY_DOWN) {
-			KeyTypedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key.key) };
+			KeyTypedEvent event{ m_convertSDLToFazonKeyCode(m_sdlEvent.key) };
 			m_data.EventCallback(event);
 		}
 
@@ -239,9 +239,9 @@ namespace Fazon {
 
 	}
 
-	KeyCode WindowsWindow::m_convertSDLToFazonKeyCode(SDL_Keycode sdlKeyCode) {
+	KeyCode WindowsWindow::m_convertSDLToFazonKeyCode(SDL_KeyboardEvent sdlKey) {
 
-		switch (sdlKeyCode)
+		switch (sdlKey.key)
 		{
 		case SDLK_TAB: return Key::Tab;
 		case SDLK_LEFT: return Key::Left;

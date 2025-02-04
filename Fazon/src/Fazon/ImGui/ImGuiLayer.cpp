@@ -132,8 +132,8 @@ namespace Fazon {
         
         ImGuiIO& io{ ImGui::GetIO() };
         KeyCode keycode{ event.getKeyCode() };
-        if (keycode > 0 && keycode < 0x10000) {
-            io.AddInputCharacter(event.getKeyCode());
+        if (keycode >= 4 && keycode < 150) {
+            io.AddInputCharacter(convertFazonKeyToASCII(event.getKeyCode()));
         }
 
         return false;

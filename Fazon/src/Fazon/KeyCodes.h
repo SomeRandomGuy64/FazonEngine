@@ -1,13 +1,18 @@
 #pragma once
 
+#include "fzpch.h"
 #include <stdint.h>
 
 namespace Fazon {
 
 	using KeyCode = uint16_t;
 
+    char convertFazonKeyToASCII(KeyCode);
+
 	namespace Key {
 
+        // Keys which are supposed to be visible AS A CHRACTER when typed are grouped together: KeyCodes 4 - 128
+        // Keys which are not supposed to be visible when typed are grouped together: KeyCodes KeyCodes 256 - 399
 		enum : KeyCode {
 
             // Taken from SDL3/SDL_scancode.h
@@ -59,17 +64,17 @@ namespace Fazon {
             Nine = 38,
             Zero = 39,
 
-            Return = 40,
-            Escape = 41,
-            Backspace = 42,
-            Tab = 43,
-            Space = 44,
+            Return = 256,
+            Escape = 257,
+            Backspace = 258,
+            Tab = 259,
+            Space = 260,
 
-            Minus = 45,
-            Equals = 46,
-            LeftBracket = 47,
-            RightBracket = 48,
-            Backslash = 49,                 /**< Located at the lower left of the return
+            Minus = 40,
+            Equals = 41,
+            LeftBracket = 42,
+            RightBracket = 43,
+            Backslash = 44,                 /**< Located at the lower left of the return
                                           *   key on ISO keyboards and at the right end
                                           *   of the QWERTY row on ANSI keyboards.
                                           *   Produces REVERSE SOLIDUS (backslash) and
@@ -83,7 +88,7 @@ namespace Fazon {
                                           *   layout, and ASTERISK and MICRO SIGN in a
                                           *   French Windows layout.
                                           */
-            NonUSHash = 50,                /**< ISO USB keyboards actually use this code
+            NonUSHash = 55,                /**< ISO USB keyboards actually use this code
                                           *   instead of 49 for the same key, but all
                                           *   OSes I've seen treat the two codes
                                           *   identically. So, as an implementor, unless
@@ -95,9 +100,9 @@ namespace Fazon {
                                           *   will never generate it with most (all?)
                                           *   keyboards.
                                           */
-            Semicolon = 51,
-            Apostrophe = 52,
-            Grave = 53,                 /**< Located in the top left corner (on both ANSI
+            Semicolon = 46,
+            Apostrophe = 47,
+            Grave = 48,                 /**< Located in the top left corner (on both ANSI
                                       *   and ISO keyboards). Produces GRAVE ACCENT and
                                       *   TILDE in a US Windows layout and in US and UK
                                       *   Mac layouts on ANSI keyboards, GRAVE ACCENT
@@ -114,64 +119,62 @@ namespace Fazon {
                                       *   SIGN in a Swiss German, German, or French Mac
                                       *   layout on ANSI keyboards.
                                       */
-            Comma = 54,
-            Period = 55,
-            FullStop = 55,            // Full Stop is just a different word for Period
-            Slash = 56,
+            Comma = 49,
+            Period = 50,
+            Slash = 51,
 
-            CapsLock = 57,
+            CapsLock = 261,
 
-            F1 = 58,
-            F2 = 59,
-            F3 = 60,
-            F4 = 61,
-            F5 = 62,
-            F6 = 63,
-            F7 = 64,
-            F8 = 65,
-            F9 = 66,
-            F10 = 67,
-            F11 = 68,
-            F12 = 69,
+            F1 = 262,
+            F2 = 263,
+            F3 = 264,
+            F4 = 265,
+            F5 = 266,
+            F6 = 267,
+            F7 = 268,
+            F8 = 269,
+            F9 = 270,
+            F10 = 271,
+            F11 = 272,
+            F12 = 273,
 
-            PrintScreen = 70,
-            ScrollLock = 71,
-            Pause = 72,
-            Insert = 73,                /**< insert on PC, help on some Mac keyboards (but
+            PrintScreen = 274,
+            ScrollLock = 275,
+            Pause = 276,
+            Insert = 277,                /**< insert on PC, help on some Mac keyboards (but
                                            does send code 73, not 117) */
-            Home = 74,
-            PageUp = 75,
-            Delete = 76,
-            End = 77,
-            PageDown = 78,
-            Right = 79,
-            Left = 80,
-            Down = 81,
-            Up = 82,
+            Home = 278,
+            PageUp = 279,
+            Delete = 280,
+            End = 281,
+            PageDown = 282,
+            Right = 283,
+            Left = 284,
+            Down = 285,
+            Up = 286,
 
-            NumLock = 83, // num lock on PC, clear on Mac keyboards
-            MacClear = 83,
-            
+            NumLock = 287, // num lock on PC, clear on Mac keyboards
+
             // Keypad
-            KpDivide = 84,
-            KpMultiply = 85,
-            KpMinus = 86,
-            KpPlus = 87,
-            KpEnter = 88,
-            KpOne = 89,
-            KpTwo = 90,
-            KpThree = 91,
-            KpFour = 92,
-            KpFive = 93,
-            KpSix = 94,
-            KpSeven = 95,
-            KpEight = 96,
-            KpNine = 97,
-            KpZero = 98,
-            KpPeriod = 99,
-            KpFullStop = 99,
+            KpDivide = 52,
+            KpMultiply = 53,
+            KpMinus = 54,
+            KpPlus = 55,
+            KpEnter = 56,
+            KpOne = 57,
+            KpTwo = 58,
+            KpThree = 59,
+            KpFour = 60,
+            KpFive = 61,
+            KpSix = 62,
+            KpSeven = 63,
+            KpEight = 64,
+            KpNine = 65,
+            KpZero = 66,
+            KpPeriod = 67,
+            KpFullStop = 68,
 
-            NonUSBackslash = 100, /**< This is the additional key that ISO
+            NonUSBackslash = 69, /**< This is the additional key that ISO
                                                 *   keyboards have over ANSI ones,
                                                 *   located between left shift and Y.
                                                 *   Produces GRAVE ACCENT and TILDE in a
@@ -181,134 +184,131 @@ namespace Fazon {
                                                 *   LESS-THAN SIGN and GREATER-THAN SIGN
                                                 *   in a Swiss German, German, or French
                                                 *   layout. */
-            Application = 101, /**< windows contextual menu, compose */
-            Power = 102, /**< The USB document says this is a status flag,
+            Application = 288, /**< windows contextual menu, compose */
+            Power = 289, /**< The USB document says this is a status flag,
                                        *   not a physical key - but some Mac keyboards
                                        *   do have a power key. */
-            KpEquals = 103,
-            F13 = 104,
-            F14 = 105,
-            F15 = 106,
-            F16 = 107,
-            F17 = 108,
-            F18 = 109,
-            F19 = 110,
-            F20 = 111,
-            F21 = 112,
-            F22 = 113,
-            F23 = 114,
-            F24 = 115,
-            Execute = 116,
-            Help = 117,    /**< AL Integrated Help Center */
-            Menu = 118,    /**< Menu (show menu) */
-            Select = 119,
-            AcStop = 120,    /**< AC Stop */
-            AcAgain = 121,   /**< AC Redo/Repeat */
-            AcUndo = 122,    /**< AC Undo */
-            AcCut = 123,     /**< AC Cut */
-            AcCopy = 124,    /**< AC Copy */
-            AcPaste = 125,   /**< AC Paste */
-            AcFind = 126,    /**< AC Find */
-            Mute = 127,
-            VolumeUp = 128,
-            VolumeDown = 129,
-            /* not sure whether there's a reason to enable these */
-            /*     SDL_SCANCODE_LOCKINGCAPSLOCK = 130,  */
-            /*     SDL_SCANCODE_LOCKINGNUMLOCK = 131, */
-            /*     SDL_SCANCODE_LOCKINGSCROLLLOCK = 132, */
-            KpComma = 133,
-            KpEqualsAs400 = 134,
+            KpEquals = 70,
+            F13 = 290,
+            F14 = 291,
+            F15 = 292,
+            F16 = 293,
+            F17 = 294,
+            F18 = 295,
+            F19 = 296,
+            F20 = 297,
+            F21 = 298,
+            F22 = 299,
+            F23 = 300,
+            F24 = 301,
+            Execute = 302,
+            Help = 303,    /**< AL Integrated Help Center */
+            Menu = 304,    /**< Menu (show menu) */
+            Select = 305,
+            AcStop = 306,    /**< AC Stop */
+            AcAgain = 307,   /**< AC Redo/Repeat */
+            AcUndo = 308,    /**< AC Undo */
+            AcCut = 309,     /**< AC Cut */
+            AcCopy = 310,    /**< AC Copy */
+            AcPaste = 311,   /**< AC Paste */
+            AcFind = 312,    /**< AC Find */
+            Mute = 313,
+            VolumeUp = 314,
+            VolumeDown = 315,
 
-            International1 = 135, /**< used on Asian keyboards, see
+            KpComma = 71,
+            KpEqualsAs400 = 72,
+
+            International1 = 73, /**< used on Asian keyboards, see
                                                     footnotes in USB doc */
-            International12 = 136,
-            International3 = 137, /**< Yen */
-            International4 = 138,
-            International5 = 139,
-            International6 = 140,
-            International7 = 141,
-            International8 = 142,
-            International9 = 143,
-            Lang1 = 144, /**< Hangul/English toggle */
-            Lang2 = 145, /**< Hanja conversion */
-            Lang3 = 146, /**< Katakana */
-            Lang4 = 147, /**< Hiragana */
-            Lang5 = 148, /**< Zenkaku/Hankaku */
-            Lang6 = 149, /**< reserved */
-            Lang7 = 150, /**< reserved */
-            Lang8 = 151, /**< reserved */
-            Lang9 = 152, /**< reserved */
+            International12 = 74,
+            International3 = 75, /**< Yen */
+            International4 = 76,
+            International5 = 77,
+            International6 = 78,
+            International7 = 79,
+            International8 = 80,
+            International9 = 81,
+            Lang1 = 316, /**< Hangul/English toggle */
+            Lang2 = 317, /**< Hanja conversion */
+            Lang3 = 318, /**< Katakana */
+            Lang4 = 319, /**< Hiragana */
+            Lang5 = 320, /**< Zenkaku/Hankaku */
+            Lang6 = 321, /**< reserved */
+            Lang7 = 322, /**< reserved */
+            Lang8 = 323, /**< reserved */
+            Lang9 = 324, /**< reserved */
 
-            AltErase = 153,    /**< Erase-Eaze */
-            SysReq = 154,
-            AcCancel = 155,      /**< AC Cancel */
-            Clear = 156,
-            Prior = 157,
-            Return2 = 158,
-            Seperator = 159,
-            Out = 160,
-            Oper = 161,
-            ClearAgain = 162,
-            CRSEL = 163,
-            EXSEL = 164,
+            AltErase = 325,    /**< Erase-Eaze */
+            SysReq = 326,
+            AcCancel = 327,      /**< AC Cancel */
+            Clear = 328,
+            Prior = 329,
+            Return2 = 330,
+            Seperator = 331,
+            Out = 332,
+            Oper = 333,
+            ClearAgain = 334,
+            CRSEL = 335,
+            EXSEL = 336,
 
-            Kp00 = 176,
-            Kp000 = 177,
-            ThousandsSeperator = 178,
-            DecimalSeperator = 179,
-            CurrencyUnit = 180,
-            CurrencySubUnit = 181,
-            KpLeftParenthesis = 182,
-            KpRightParenthesis = 183,
-            KpLeftBrace = 184,
-            KpRightBrace = 185,
-            KpTab = 186,
-            KpBackspace = 187,
-            KpA = 188,
-            KpB = 189,
-            KpC = 190,
-            KpD = 191,
-            KpE = 192,
-            KpF = 193,
-            KpXOR = 194,
-            KpPower = 195,
-            KpPercent = 196,
-            KpLess = 197,
-            KpGreater = 198,
-            KpAmpersand = 199,
-            KpDoubleAmpersand = 200,
-            KpVerticalBar = 201,
-            KpDoubleVerticalBar = 202,
-            KpColon = 203,
-            KpHash = 204,
-            KpSpace = 205,
-            KpAt = 206,
-            KpExclam = 207,
-            KpMemstore = 208,
-            KpMemRecall = 209,
-            KpMemClear = 210,
-            KpMemAdd = 211,
-            KpMemSubtract = 212,
-            KpMemMultiply = 213,
-            KpMemDivide = 214,
-            KpPlusMinus = 215,
-            KpClear = 216,
-            KpClearEntry = 217,
-            KpBinary = 218,
-            KpOctal = 219,
-            KpDecimal = 220,
-            KpHexadecimal = 221,
+            Kp00 = 82,
+            Kp000 = 83,
+            ThousandsSeperator = 84,
+            DecimalSeperator = 85,
+            CurrencyUnit = 86,
+            CurrencySubUnit = 87,
+            KpLeftParenthesis = 88,
+            KpRightParenthesis = 89,
+            KpLeftBrace = 90,
+            KpRightBrace = 91,
+            KpTab = 337,
+            KpBackspace = 338,
+            KpA = 92,
+            KpB = 93,
+            KpC = 94,
+            KpD = 95,
+            KpE = 96,
+            KpF = 97,
+            KpXOR = 339,
+            KpPower = 340,
+            KpPercent = 98,
+            KpLess = 99,
+            KpGreater = 100,
+            KpAmpersand = 101,
+            KpDoubleAmpersand = 102,
+            KpVerticalBar = 103,
+            KpDoubleVerticalBar = 104,
+            KpColon = 105,
+            KpHash = 106,
+            KpSpace = 107,
+            KpAt = 108,
+            KpExclam = 109,
+            KpMemstore = 341,
+            KpMemRecall = 342,
+            KpMemClear = 343,
+            KpMemAdd = 110,
+            KpMemSubtract = 111,
+            KpMemMultiply = 112,
+            KpMemDivide = 113,
+            KpPlusMinus = 114,
+            KpClear = 344,
+            KpClearEntry = 345,
+            KpBinary = 346,
+            KpOctal = 347,
+            KpDecimal = 348,
+            KpHexadecimal = 349,
 
-            KpLeftCtrl = 224,
-            KpLeftShift = 225,
-            KpLeftAlt = 226, /**< alt, option */
-            KpLeftGUI = 227, /**< windows, command (apple), meta */
-            KpRightCtrl = 228,
-            KpRightShift = 229,
-            KpRightAlt = 230, /**< alt gr, option */
-            KpRightGUI = 231, /**< windows, command (apple), meta */
+            KpLeftCtrl = 350,
+            KpLeftShift = 351,
+            KpLeftAlt = 352, /**< alt, option */
+            KpLeftGUI = 353, /**< windows, command (apple), meta */
+            KpRightCtrl = 354,
+            KpRightShift = 355,
+            KpRightAlt = 356, /**< alt gr, option */
+            KpRightGUI = 357, /**< windows, command (apple), meta */
 
-            KpScanMode = 257,    /**< I'm not sure if this is really not covered
+            KpScanMode = 358,    /**< I'm not sure if this is really not covered
                                          *   by any of the above, but since there's a
                                          *   special SDL_KMOD_MODE for it I'm adding it here
                                          */
@@ -326,39 +326,39 @@ namespace Fazon {
                                           */
                                           /* @{ */
 
-            KpSleep = 258,                   /**< Sleep */
-            KpWake = 259,                    /**< Wake */
+            KpSleep = 359,                   /**< Sleep */
+            KpWake = 360,                    /**< Wake */
 
-            Increment = 260,       /**< Channel Increment */
-            Decrement = 261,       /**< Channel Decrement */
+            Increment = 361,       /**< Channel Increment */
+            Decrement = 362,       /**< Channel Decrement */
 
-            MediaPlay = 262,          /**< Play */
-            MediaPause = 263,         /**< Pause */
-            MediaRecord = 264,        /**< Record */
-            MediaFastForward = 265,  /**< Fast Forward */
-            MediaRewind = 266,        /**< Rewind */
-            MediaNextTrack = 267,    /**< Next Track */
-            MediaPreviousTrack = 268, /**< Previous Track */
-            MediaStop = 269,          /**< Stop */
-            MediaEject = 270,         /**< Eject */
-            MediaPlayPause = 271,    /**< Play / Pause */
-            MediaSelect = 272,        /* Media Select */
+            MediaPlay = 363,          /**< Play */
+            MediaPause = 364,         /**< Pause */
+            MediaRecord = 365,        /**< Record */
+            MediaFastForward = 366,  /**< Fast Forward */
+            MediaRewind = 367,        /**< Rewind */
+            MediaNextTrack = 368,    /**< Next Track */
+            MediaPreviousTrack = 369, /**< Previous Track */
+            MediaStop = 370,          /**< Stop */
+            MediaEject = 371,         /**< Eject */
+            MediaPlayPause = 372,    /**< Play / Pause */
+            MediaSelect = 373,        /* Media Select */
 
-            AcNew = 273,              /**< AC New */
-            AcOpen = 274,             /**< AC Open */
-            AcClose = 275,            /**< AC Close */
-            AcExit = 276,             /**< AC Exit */
-            AcSave = 277,             /**< AC Save */
-            AcPrint = 278,            /**< AC Print */
-            AcProperties = 279,       /**< AC Properties */
+            AcNew = 374,              /**< AC New */
+            AcOpen = 375,             /**< AC Open */
+            AcClose = 376,            /**< AC Close */
+            AcExit = 377,             /**< AC Exit */
+            AcSave = 378,             /**< AC Save */
+            AcPrint = 379,            /**< AC Print */
+            AcProperties = 380,       /**< AC Properties */
 
-            AcSearch = 280,           /**< AC Search */
-            AcHome = 281,             /**< AC Home */
-            AcBack = 282,             /**< AC Back */
-            AcForward = 283,          /**< AC Forward */
-            AcStop2 = 284,             /**< AC Stop */
-            AcRefresh = 285,          /**< AC Refresh */
-            AcBookmarks = 286,        /**< AC Bookmarks */
+            AcSearch = 381,           /**< AC Search */
+            AcHome = 382,             /**< AC Home */
+            AcBack = 383,             /**< AC Back */
+            AcForward = 384,          /**< AC Forward */
+            AcStop2 = 385,             /**< AC Stop */
+            AcRefresh = 386,          /**< AC Refresh */
+            AcBookmarks = 387,        /**< AC Bookmarks */
 
             /* @} *//* Usage page 0x0C */
 
@@ -370,16 +370,16 @@ namespace Fazon {
              */
              /* @{ */
 
-            SoftLeft = 287, /**< Usually situated below the display on phones and
+            SoftLeft = 388, /**< Usually situated below the display on phones and
                                               used as a multi-function feature key for selecting
                                               a software defined function shown on the bottom left
                                               of the display. */
-            SoftRight = 288, /**< Usually situated below the display on phones and
+            SoftRight = 389, /**< Usually situated below the display on phones and
                                                used as a multi-function feature key for selecting
                                                a software defined function shown on the bottom right
                                                of the display. */
-            Call = 289, /**< Used for accepting phone calls. */
-            EndCall = 290, /**< Used for rejecting phone calls. */
+            Call = 390, /**< Used for accepting phone calls. */
+            EndCall = 391, /**< Used for rejecting phone calls. */
 
             /* @} *//* Mobile keys */
 

@@ -27,7 +27,7 @@ namespace Fazon {
 		void m_init(const WindowProps& props);
 		void m_shutdown();
 
-		KeyCode m_convertSDLToFazonKeyCode(SDL_Keycode sdlKeycode);
+		KeyCode m_convertSDLToFazonKeyCode(SDL_KeyboardEvent sdlKey);
 
 		void m_resizeWindowEvent() override;
 		void m_closeWindowEvent() override;

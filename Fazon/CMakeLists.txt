@@ -8,6 +8,7 @@ add_library(Fazon STATIC
     src/Fazon/Log.cpp
 	
     src/Fazon/KeyCodes.h
+	src/Fazon/KeyCodes.cpp
     src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
 
