@@ -22,7 +22,7 @@ TEST_CASE("Key Event Basic Functionality", "[Key Events]") {
 
 		REQUIRE(mockKeyPressedEvent.getRepeatCount() == 7);
 
-		REQUIRE(mockKeyPressedEvent.toString() == "KeyPressedEvent: 64 (7 repeats)");
+		REQUIRE(mockKeyPressedEvent.toString() == "KeyPressedEvent: '7', Key Code: 64 (7 repeats)");
 
 	}
 
@@ -41,7 +41,7 @@ TEST_CASE("Key Event Basic Functionality", "[Key Events]") {
 
 		REQUIRE(mockKeyReleasedEvent.getEventType() == EventType::KeyReleased);
 
-		REQUIRE(mockKeyReleasedEvent.toString() == "KeyReleasedEvent: 64");
+		REQUIRE(mockKeyReleasedEvent.toString() == "KeyReleasedEvent: '7', Key Code: 64");
 
 	}
 

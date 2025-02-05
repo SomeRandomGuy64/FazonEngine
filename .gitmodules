@@ -11,5 +11,5 @@
 	path = Fazon/vendor/fmt
 	url = git@github.com:fmtlib/fmt.git
 [submodule "vendor/imgui"]
-	path = vendor/imgui
+	path = vendor/imgui/imgui
 	url = git@github.com:SomeRandomGuy64/imgui.git
