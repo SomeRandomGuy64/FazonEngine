@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Fazon/InputState.h"
 
 namespace Fazon {
 
@@ -26,13 +27,21 @@ namespace Fazon {
 			: KeyEvent(keycode)
 			, m_repeatCount(repeatCount)
 		{
+			switch (keycode) {
+				case Key::KpLeftShift:
+				case Key::KpRightShift:		InputState::getInstance().setShiftHeld(true);	break;
+				case Key::KpLeftCtrl:
+				case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(true);	break;
+				case Key::KpLeftAlt:
+				case Key::KpRightAlt:		InputState::getInstance().setAltHeld(true);		break;
+			}
 		}
 
 		inline uint32_t getRepeatCount() const { return m_repeatCount; }
 
 		std::string toString() const override {
 			std::stringstream ss{};
-			ss << "KeyPressedEvent: " << m_keyCode << " (" << m_repeatCount << " repeats)";
+			ss << "KeyPressedEvent: '" << convertFazonKeyToChar(m_keyCode) << "', Key Code: " << m_keyCode << " (" << m_repeatCount << " repeats)";
 			return ss.str();
 		}
 
@@ -48,11 +57,19 @@ namespace Fazon {
 		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode)
 		{
+			switch (keycode) {
+			case Key::KpLeftShift:
+			case Key::KpRightShift:		InputState::getInstance().setShiftHeld(false);	break;
+			case Key::KpLeftCtrl:
+			case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(false);	break;
+			case Key::KpLeftAlt:
+			case Key::KpRightAlt:		InputState::getInstance().setAltHeld(false);		break;
+			}
 		}
 
 		std::string toString() const override {
 			std::stringstream ss{};
-			ss << "KeyReleasedEvent: " << m_keyCode;
+			ss << "KeyReleasedEvent: '" << convertFazonKeyToChar(m_keyCode) << "', Key Code: " << m_keyCode;
 			return ss.str();
 		}
 
@@ -69,7 +86,7 @@ namespace Fazon {
 
 		std::string toString() const override {
 			std::stringstream ss{};
-			ss << "KeyTypedEvent: " << m_keyCode;
+			ss << "KeyTypedEvent: '" << convertFazonKeyToChar(m_keyCode) << "', Key Code: " << m_keyCode;
 			return ss.str();
 		}
 

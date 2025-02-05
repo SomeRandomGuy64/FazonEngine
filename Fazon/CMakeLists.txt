@@ -11,6 +11,7 @@ add_library(Fazon STATIC
 	src/Fazon/KeyCodes.cpp
     src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
+    src/Fazon/InputState.h
 
     src/Fazon/Events/ApplicationEvent.h
     src/Fazon/Events/Event.h
@@ -54,8 +55,10 @@ source_group("Fazon" FILES
     src/Fazon/LayerStack.cpp
     src/Fazon/LayerStack.h
     src/Fazon/KeyCodes.h
+	src/Fazon/KeyCodes.cpp
     src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
+    src/Fazon/InputState.h
 )
 
 source_group("Fazon\\Events" FILES
@@ -134,7 +137,7 @@ set_target_properties(SDL_uclibc PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL3_test PROPERTIES FOLDER "Dependencies")
 set_target_properties(glad PROPERTIES FOLDER "Dependencies")
 
-target_link_libraries(Fazon PRIVATE 
+target_link_libraries(Fazon PUBLIC
     spdlog
     "${SDL3_LIB_DIR}/SDL3.lib"
 	"${GLAD_LIB_DIR}/glad.lib"

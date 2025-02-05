@@ -45,6 +45,16 @@ add_custom_command(TARGET Sandbox POST_BUILD
 	"$<TARGET_FILE_DIR:Sandbox>/SDL3.dll"
 )
 
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/vendor/imgui")
+set(IMGUI_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/ImGui")
+set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
+include_directories(${IMGUI_DIR})
+
+set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Fazon/vendor/SDL")
+set(SDL3_INCLUDE_DIR "${SDL3_DIR}/include")
+set(SDL3_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
+include_directories(${SDL3_INCLUDE_DIR})
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/bin/Debug")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin/Release")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin/Dist")

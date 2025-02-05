@@ -3,11 +3,16 @@
 #include "fzpch.h"
 #include <stdint.h>
 
+#include <imgui/imgui.h>
+#include <SDL3/SDL.h>
+
 namespace Fazon {
 
 	using KeyCode = uint16_t;
 
-    char convertFazonKeyToASCII(KeyCode);
+    char convertFazonKeyToChar(KeyCode key);
+    ImGuiKey convertFazonKeyToImguiKeyCode(KeyCode keycode);
+    KeyCode convertSDLKeyToFazonKey(SDL_KeyboardEvent sdlKey);
 
 	namespace Key {
 
@@ -68,13 +73,13 @@ namespace Fazon {
             Escape = 257,
             Backspace = 258,
             Tab = 259,
-            Space = 260,
+            Space = 40,
 
-            Minus = 40,
-            Equals = 41,
-            LeftBracket = 42,
-            RightBracket = 43,
-            Backslash = 44,                 /**< Located at the lower left of the return
+            Minus = 41,
+            Equals = 42,
+            LeftBracket = 43,
+            RightBracket = 44,
+            Backslash = 45,                 /**< Located at the lower left of the return
                                           *   key on ISO keyboards and at the right end
                                           *   of the QWERTY row on ANSI keyboards.
                                           *   Produces REVERSE SOLIDUS (backslash) and
@@ -88,7 +93,7 @@ namespace Fazon {
                                           *   layout, and ASTERISK and MICRO SIGN in a
                                           *   French Windows layout.
                                           */
-            NonUSHash = 55,                /**< ISO USB keyboards actually use this code
+            NonUSHash = 46,                /**< ISO USB keyboards actually use this code
                                           *   instead of 49 for the same key, but all
                                           *   OSes I've seen treat the two codes
                                           *   identically. So, as an implementor, unless
@@ -100,9 +105,9 @@ namespace Fazon {
                                           *   will never generate it with most (all?)
                                           *   keyboards.
                                           */
-            Semicolon = 46,
-            Apostrophe = 47,
-            Grave = 48,                 /**< Located in the top left corner (on both ANSI
+            Semicolon = 47,
+            Apostrophe = 48,
+            Grave = 49,                 /**< Located in the top left corner (on both ANSI
                                       *   and ISO keyboards). Produces GRAVE ACCENT and
                                       *   TILDE in a US Windows layout and in US and UK
                                       *   Mac layouts on ANSI keyboards, GRAVE ACCENT
@@ -119,9 +124,9 @@ namespace Fazon {
                                       *   SIGN in a Swiss German, German, or French Mac
                                       *   layout on ANSI keyboards.
                                       */
-            Comma = 49,
-            Period = 50,
-            Slash = 51,
+            Comma = 50,
+            Period = 51,
+            Slash = 52,
 
             CapsLock = 261,
 
@@ -156,25 +161,25 @@ namespace Fazon {
             NumLock = 287, // num lock on PC, clear on Mac keyboards
 
             // Keypad
-            KpDivide = 52,
-            KpMultiply = 53,
-            KpMinus = 54,
-            KpPlus = 55,
-            KpEnter = 56,
-            KpOne = 57,
-            KpTwo = 58,
-            KpThree = 59,
-            KpFour = 60,
-            KpFive = 61,
-            KpSix = 62,
-            KpSeven = 63,
-            KpEight = 64,
-            KpNine = 65,
-            KpZero = 66,
-            KpPeriod = 67,
-            KpFullStop = 68,
+            KpDivide = 53,
+            KpMultiply = 54,
+            KpMinus = 55,
+            KpPlus = 56,
+            KpEnter = 57,
+            KpOne = 58,
+            KpTwo = 59,
+            KpThree = 60,
+            KpFour = 61,
+            KpFive = 62,
+            KpSix = 63,
+            KpSeven = 64,
+            KpEight = 65,
+            KpNine = 66,
+            KpZero = 67,
+            KpPeriod = 68,
+            KpFullStop = 69,
 
-            NonUSBackslash = 69, /**< This is the additional key that ISO
+            NonUSBackslash = 70, /**< This is the additional key that ISO
                                                 *   keyboards have over ANSI ones,
                                                 *   located between left shift and Y.
                                                 *   Produces GRAVE ACCENT and TILDE in a
@@ -188,7 +193,7 @@ namespace Fazon {
             Power = 289, /**< The USB document says this is a status flag,
                                        *   not a physical key - but some Mac keyboards
                                        *   do have a power key. */
-            KpEquals = 70,
+            KpEquals = 71,
             F13 = 290,
             F14 = 291,
             F15 = 292,
@@ -216,19 +221,19 @@ namespace Fazon {
             VolumeUp = 314,
             VolumeDown = 315,
 
-            KpComma = 71,
-            KpEqualsAs400 = 72,
+            KpComma = 72,
+            KpEqualsAs400 = 73,
 
-            International1 = 73, /**< used on Asian keyboards, see
+            International1 = 74, /**< used on Asian keyboards, see
                                                     footnotes in USB doc */
-            International12 = 74,
-            International3 = 75, /**< Yen */
-            International4 = 76,
-            International5 = 77,
-            International6 = 78,
-            International7 = 79,
-            International8 = 80,
-            International9 = 81,
+            International12 = 75,
+            International3 = 76, /**< Yen */
+            International4 = 77,
+            International5 = 78,
+            International6 = 79,
+            International7 = 80,
+            International8 = 81,
+            International9 = 82,
             Lang1 = 316, /**< Hangul/English toggle */
             Lang2 = 317, /**< Hanja conversion */
             Lang3 = 318, /**< Katakana */
@@ -252,46 +257,46 @@ namespace Fazon {
             CRSEL = 335,
             EXSEL = 336,
 
-            Kp00 = 82,
-            Kp000 = 83,
-            ThousandsSeperator = 84,
-            DecimalSeperator = 85,
-            CurrencyUnit = 86,
-            CurrencySubUnit = 87,
-            KpLeftParenthesis = 88,
-            KpRightParenthesis = 89,
-            KpLeftBrace = 90,
-            KpRightBrace = 91,
+            Kp00 = 83,
+            Kp000 = 84,
+            ThousandsSeperator = 85,
+            DecimalSeperator = 86,
+            CurrencyUnit = 87,
+            CurrencySubUnit = 88,
+            KpLeftParenthesis = 89,
+            KpRightParenthesis = 90,
+            KpLeftBrace = 91,
+            KpRightBrace = 92,
             KpTab = 337,
             KpBackspace = 338,
-            KpA = 92,
-            KpB = 93,
-            KpC = 94,
-            KpD = 95,
-            KpE = 96,
-            KpF = 97,
+            KpA = 93,
+            KpB = 94,
+            KpC = 95,
+            KpD = 96,
+            KpE = 97,
+            KpF = 98,
             KpXOR = 339,
             KpPower = 340,
-            KpPercent = 98,
-            KpLess = 99,
-            KpGreater = 100,
-            KpAmpersand = 101,
-            KpDoubleAmpersand = 102,
-            KpVerticalBar = 103,
-            KpDoubleVerticalBar = 104,
-            KpColon = 105,
-            KpHash = 106,
-            KpSpace = 107,
-            KpAt = 108,
-            KpExclam = 109,
+            KpPercent = 99,
+            KpLess = 100,
+            KpGreater = 101,
+            KpAmpersand = 102,
+            KpDoubleAmpersand = 103,
+            KpVerticalBar = 104,
+            KpDoubleVerticalBar = 105,
+            KpColon = 106,
+            KpHash = 107,
+            KpSpace = 108,
+            KpAt = 109,
+            KpExclam = 110,
             KpMemstore = 341,
             KpMemRecall = 342,
             KpMemClear = 343,
-            KpMemAdd = 110,
-            KpMemSubtract = 111,
-            KpMemMultiply = 112,
-            KpMemDivide = 113,
-            KpPlusMinus = 114,
+            KpMemAdd = 111,
+            KpMemSubtract = 112,
+            KpMemMultiply = 113,
+            KpMemDivide = 114,
+            KpPlusMinus = 115,
             KpClear = 344,
             KpClearEntry = 345,
             KpBinary = 346,
