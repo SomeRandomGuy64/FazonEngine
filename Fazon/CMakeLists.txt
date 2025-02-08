@@ -34,9 +34,6 @@ add_library(Fazon STATIC
 	src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
 	
-    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.cpp
-    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.h
-
     src/Fazon.h
 )
 
@@ -82,9 +79,6 @@ source_group("Fazon\\Platform\\Windows" FILES
 source_group("Fazon\\Platform\\OpenGL" FILES
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
-	
-	src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.cpp
-    src/Fazon/Platform/OpenGL/ImGuiSDL3Renderer.h
 )
 
 # Include project-wide compiler options function
