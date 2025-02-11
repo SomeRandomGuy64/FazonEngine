@@ -8,7 +8,7 @@ namespace Fazon {
 	class Layer {
 
 	public:
-		Layer(const std::string& debugName = "Layer");
+		Layer(const std::string_view debugName = "Layer");
 		virtual ~Layer();
 
 		virtual void onAttach() {}
@@ -16,7 +16,7 @@ namespace Fazon {
 		virtual void onUpdate() {}
 		virtual void onEvent(Event&) {}
 
-		inline const std::string& getName() const { return m_debugName; }
+		inline const std::string_view getName() const { return m_debugName; }
 
 	protected:
 		std::string m_debugName{};

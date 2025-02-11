@@ -3,7 +3,7 @@
 
 namespace Fazon {
 
-	Layer::Layer(const std::string& debugName)
+	Layer::Layer(const std::string_view debugName)
 		: m_debugName(debugName)
 	{
 	}
