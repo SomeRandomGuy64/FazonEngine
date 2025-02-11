@@ -132,7 +132,7 @@ namespace Fazon {
         
         ImGuiIO& io{ ImGui::GetIO() };
         KeyCode keycode{ event.getKeyCode() };
-        if (keycode >= 4 && keycode < 150) {
+        if (keycode >= 4 && keycode < 128) {
             io.AddInputCharacter(convertFazonKeyToChar(event.getKeyCode()));
         }
 
