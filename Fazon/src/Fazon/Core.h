@@ -1,4 +1,4 @@
-#pragma once
+#pragma once	
 
 #include "Fazon/fzpch.h"
 
@@ -22,7 +22,11 @@
 	#error "Fazon only supports Windows!"
 #endif
 
-#ifdef FZ_ENABLE_ASSERTS
+#ifdef FZ_DEBUG
+	#define FZ_ENABLE_ASSERTS
+#endif
+
+#if FZ_ENABLE_ASSERTS
 	#define FZ_ASSERT(x, ...) { if(!(x)) { FZ_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK(); } }
 	#define FZ_CORE_ASSERT(x, ...) { if(!(x)) { FZ_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); DEBUG_BREAK(); } }
 #else
