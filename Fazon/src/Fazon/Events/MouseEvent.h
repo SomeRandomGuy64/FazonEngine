@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Fazon/InputState.h"
 #include "Fazon/MouseCodes.h"
 
 namespace Fazon {
@@ -26,6 +27,7 @@ namespace Fazon {
 		MouseButtonPressedEvent(MouseCode mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
+			InputState::setMouseButtonState(mouseButtonCode, true);
 		}
 
 		std::string toString() const override {
@@ -43,6 +45,7 @@ namespace Fazon {
 		MouseButtonReleasedEvent(MouseCode mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
+			InputState::setMouseButtonState(mouseButtonCode, false);
 		}
 
 		std::string toString() const override {

@@ -1,34 +1,28 @@
 #pragma once
 
+#include "Fazon/Core.h"
+#include "Fazon/KeyCodes.h"
+#include "Fazon/MouseCodes.h"
+
 namespace Fazon {
 
 	class InputState {
 
 	public:
 
-		static InputState& getInstance() {
-			static InputState instance;
-			return instance;
-		}
+		static InputState* getInstance() { return s_instance; }
 
-		void setShiftHeld(bool held) { m_shiftHeld = held; }
-		void setCtrlHeld(bool held) { m_ctrlHeld = held; }
-		void setAltHeld(bool held) { m_altHeld = held; }
-
-		bool isShiftHeld() const { return m_shiftHeld; }
-		bool isCtrlHeld() const { return m_ctrlHeld; }
-		bool isAltHeld() const { return m_altHeld; }
+		static const bool* getKeyboardState(KeyCode keycode);
+		static const bool* getMouseButtonState(MouseCode mousecode);
+		static void setKeyboardState(KeyCode keycode, bool state);
+		static void setMouseButtonState(MouseCode mousecode, bool state);
 
 	private:
 
-		bool m_shiftHeld{ false };
-		bool m_ctrlHeld{ false };
-		bool m_altHeld{ false };
+		static InputState* s_instance;
 
-		InputState() {}
-		~InputState() {}
-		InputState(const InputState&) = delete;
-		InputState& operator=(const InputState&) = delete;
+		static bool s_keyboardState[512];
+		static bool s_mouseButtonState[512];
 
 	};
 

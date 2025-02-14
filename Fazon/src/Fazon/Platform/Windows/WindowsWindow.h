@@ -23,6 +23,8 @@ namespace Fazon {
 		void setVSync(bool enabled) override;
 		bool isVSync() const override;
 
+		inline virtual void* getNativeWindow() const override { return m_window; }
+
 	private:
 		void m_init(const WindowProps& props);
 		void m_shutdown();

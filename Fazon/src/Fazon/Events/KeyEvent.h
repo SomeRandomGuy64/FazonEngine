@@ -28,14 +28,7 @@ namespace Fazon {
 			: KeyEvent(keycode)
 			, m_repeatCount(repeatCount)
 		{
-			switch (keycode) {
-				case Key::KpLeftShift:
-				case Key::KpRightShift:		InputState::getInstance().setShiftHeld(true);	break;
-				case Key::KpLeftCtrl:
-				case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(true);	break;
-				case Key::KpLeftAlt:
-				case Key::KpRightAlt:		InputState::getInstance().setAltHeld(true);		break;
-			}
+			InputState::getInstance()->setKeyboardState(keycode, true);
 		}
 
 		inline uint32_t getRepeatCount() const { return m_repeatCount; }
@@ -58,14 +51,7 @@ namespace Fazon {
 		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode)
 		{
-				switch (keycode) {
-				case Key::KpLeftShift:
-				case Key::KpRightShift:		InputState::getInstance().setShiftHeld(false);	break;
-				case Key::KpLeftCtrl:
-				case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(false);	break;
-				case Key::KpLeftAlt:
-				case Key::KpRightAlt:		InputState::getInstance().setAltHeld(false);	break;
-			}
+			InputState::getInstance()->setKeyboardState(keycode, false);
 		}
 
 		std::string toString() const override {
