@@ -9,9 +9,10 @@ add_library(Fazon STATIC
 	
     src/Fazon/KeyCodes.h
 	src/Fazon/KeyCodes.cpp
-    src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
+    src/Fazon/Input.h
     src/Fazon/InputState.h
+    src/Fazon/InputState.cpp
 
     src/Fazon/Events/ApplicationEvent.h
     src/Fazon/Events/Event.h
@@ -20,8 +21,12 @@ add_library(Fazon STATIC
     src/Fazon/Events/WindowEvent.h
 
     src/Fazon/Window.h
+
     src/Fazon/Platform/Windows/WindowsWindow.cpp
     src/Fazon/Platform/Windows/WindowsWindow.h
+
+    src/Fazon/Platform/Windows/WindowsInput.h
+    src/Fazon/Platform/Windows/WindowsInput.cpp
 
     src/Fazon/Layer.cpp
     src/Fazon/Layer.h
@@ -53,9 +58,10 @@ source_group("Fazon" FILES
     src/Fazon/LayerStack.h
     src/Fazon/KeyCodes.h
 	src/Fazon/KeyCodes.cpp
-    src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
+    src/Fazon/Input.h
     src/Fazon/InputState.h
+    src/Fazon/InputState.cpp
 )
 
 source_group("Fazon\\Events" FILES
@@ -74,6 +80,9 @@ source_group("Fazon\\ImGui" FILES
 source_group("Fazon\\Platform\\Windows" FILES
     src/Fazon/Platform/Windows/WindowsWindow.cpp
     src/Fazon/Platform/Windows/WindowsWindow.h
+    src/Fazon/Platform/Windows/WindowsInput.h
+    src/Fazon/Platform/Windows/WindowsInput.cpp
+
 )
 
 source_group("Fazon\\Platform\\OpenGL" FILES

@@ -3,6 +3,8 @@
 
 #include "Fazon/Events/WindowEvent.h"
 
+#include "Input.h"
+
 namespace Fazon {
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -55,6 +57,9 @@ namespace Fazon {
 			for (Layer* layer : m_layerStack) {
 				layer->onUpdate();
 			}
+
+			auto [x, y] { Input::getMousePos() };
+			FZ_CORE_TRACE("{0}, {1}", x, y);
 			
 			m_window->onUpdate();
 

@@ -1,11 +1,11 @@
 #include "KeyCodes.h"
-#include "InputState.h"
+#include "Input.h"
 
 namespace Fazon {
 
 	char convertFazonKeyToChar(KeyCode key) {
 
-		switch (InputState::getInstance().isShiftHeld()) {
+		switch (Input::isKeyPressed(Key::KpLeftShift) | Input::isKeyPressed(Key::KpRightShift)) {
 			case false: {
 				switch (key) {
 					case Key::A:
@@ -425,5 +425,116 @@ namespace Fazon {
 			default:				return Key::Unknown;
 		}
 	}
+
+	SDL_Keycode convertFazonKeyToSDLKey(KeyCode keycode) {
+
+		switch (keycode) {
+			case Key::Tab:			return SDLK_TAB;
+			case Key::Left:			return SDLK_LEFT;
+			case Key::Right:		return SDLK_RIGHT;
+			case Key::Up:			return SDLK_UP;
+			case Key::Down:			return SDLK_DOWN;
+			case Key::PageUp:		return SDLK_PAGEUP;
+			case Key::PageDown:		return SDLK_PAGEDOWN;
+			case Key::Home:			return SDLK_HOME;
+			case Key::End:			return SDLK_END;
+			case Key::Insert:		return SDLK_INSERT;
+			case Key::Delete:		return SDLK_DELETE;
+			case Key::Backspace:	return SDLK_BACKSPACE;
+			case Key::Space:		return SDLK_SPACE;
+			case Key::Return:		return SDLK_RETURN;
+			case Key::Escape:		return SDLK_ESCAPE;
+			case Key::Apostrophe:	return SDLK_APOSTROPHE;
+			case Key::Comma:		return SDLK_COMMA;
+			case Key::Minus:		return SDLK_MINUS;
+			case Key::Period:		return SDLK_PERIOD;
+			case Key::Slash:		return SDLK_SLASH;
+			case Key::Semicolon:	return SDLK_SEMICOLON;
+			case Key::Equals:		return SDLK_EQUALS;
+			case Key::LeftBracket:	return SDLK_LEFTBRACKET;
+			case Key::Backslash:	return SDLK_BACKSLASH;
+			case Key::RightBracket: return SDLK_RIGHTBRACKET;
+			case Key::Grave:		return SDLK_GRAVE;
+			case Key::CapsLock:		return SDLK_CAPSLOCK;
+			case Key::ScrollLock:	return SDLK_SCROLLLOCK;
+			case Key::NumLock:		return SDLK_NUMLOCKCLEAR;
+			case Key::PrintScreen:	return SDLK_PRINTSCREEN;
+			case Key::Pause:		return SDLK_PAUSE;
+			case Key::KpLeftCtrl:	return SDLK_LCTRL;
+			case Key::KpLeftShift:	return SDLK_RCTRL;
+			case Key::KpLeftAlt:	return SDLK_LALT;
+			case Key::KpLeftGUI:	return SDLK_LGUI;
+			case Key::KpRightCtrl:	return SDLK_RCTRL;
+			case Key::KpRightShift:	return SDLK_RSHIFT;
+			case Key::KpRightAlt:	return SDLK_RALT;
+			case Key::KpRightGUI:	return SDLK_RGUI;
+			case Key::Application:	return SDLK_APPLICATION;
+			case Key::Zero:			return SDLK_0;
+			case Key::One:			return SDLK_1;
+			case Key::Two:			return SDLK_2;
+			case Key::Three:		return SDLK_3;
+			case Key::Four:			return SDLK_4;
+			case Key::Five:			return SDLK_5;
+			case Key::Six:			return SDLK_6;
+			case Key::Seven:		return SDLK_7;
+			case Key::Eight:		return SDLK_8;
+			case Key::Nine:			return SDLK_9;
+			case Key::A:			return SDLK_A;
+			case Key::B:			return SDLK_B;
+			case Key::C:			return SDLK_C;
+			case Key::D:			return SDLK_D;
+			case Key::E:			return SDLK_E;
+			case Key::F:			return SDLK_F;
+			case Key::G:			return SDLK_G;
+			case Key::H:			return SDLK_H;
+			case Key::I:			return SDLK_I;
+			case Key::J:			return SDLK_J;
+			case Key::K:			return SDLK_K;
+			case Key::L:			return SDLK_L;
+			case Key::M:			return SDLK_M;
+			case Key::N:			return SDLK_N;
+			case Key::O:			return SDLK_O;
+			case Key::P:			return SDLK_P;
+			case Key::Q:			return SDLK_Q;
+			case Key::R:			return SDLK_R;
+			case Key::S:			return SDLK_S;
+			case Key::T:			return SDLK_T;
+			case Key::U:			return SDLK_U;
+			case Key::V:			return SDLK_V;
+			case Key::W:			return SDLK_W;
+			case Key::X:			return SDLK_X;
+			case Key::Y:			return SDLK_Y;
+			case Key::Z:			return SDLK_Z;
+			case Key::F1:			return SDLK_F1;
+			case Key::F2:			return SDLK_F2;
+			case Key::F3:			return SDLK_F3;
+			case Key::F4:			return SDLK_F4;
+			case Key::F5:			return SDLK_F5;
+			case Key::F6:			return SDLK_F6;
+			case Key::F7:			return SDLK_F7;
+			case Key::F8:			return SDLK_F8;
+			case Key::F9:			return SDLK_F9;
+			case Key::F10:			return SDLK_F10;
+			case Key::F11:			return SDLK_F11;
+			case Key::F12:			return SDLK_F12;
+			case Key::F13:			return SDLK_F13;
+			case Key::F14:			return SDLK_F14;
+			case Key::F15:			return SDLK_F15;
+			case Key::F16:			return SDLK_F16;
+			case Key::F17:			return SDLK_F17;
+			case Key::F18:			return SDLK_F18;
+			case Key::F19:			return SDLK_F19;
+			case Key::F20:			return SDLK_F20;
+			case Key::F21:			return SDLK_F21;
+			case Key::F22:			return SDLK_F22;
+			case Key::F23:			return SDLK_F23;
+			case Key::F24:			return SDLK_F24;
+			case Key::AcBack:		return SDLK_AC_BACK;
+			case Key::AcForward:	return SDLK_AC_FORWARD;
+
+			default:				return SDLK_UNKNOWN;
+		}
+	}
+
 
 }
