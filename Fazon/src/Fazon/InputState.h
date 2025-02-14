@@ -1,31 +1,35 @@
 #pragma once
 
-class InputState {
+namespace Fazon {
 
-public:
+	class InputState {
 
-	static InputState& getInstance() {
-		static InputState instance;
-		return instance;
-	}
+	public:
 
-	void setShiftHeld(bool held) { m_shiftHeld = held; }
-	void setCtrlHeld(bool held) { m_ctrlHeld = held; }
-	void setAltHeld(bool held) { m_altHeld = held; }
+		static InputState& getInstance() {
+			static InputState instance;
+			return instance;
+		}
 
-	bool isShiftHeld() const { return m_shiftHeld; }
-	bool isCtrlHeld() const { return m_ctrlHeld; }
-	bool isAltHeld() const { return m_altHeld; }
+		void setShiftHeld(bool held) { m_shiftHeld = held; }
+		void setCtrlHeld(bool held) { m_ctrlHeld = held; }
+		void setAltHeld(bool held) { m_altHeld = held; }
 
-private:
+		bool isShiftHeld() const { return m_shiftHeld; }
+		bool isCtrlHeld() const { return m_ctrlHeld; }
+		bool isAltHeld() const { return m_altHeld; }
 
-	bool m_shiftHeld{ false };
-	bool m_ctrlHeld{ false };
-	bool m_altHeld{ false };
+	private:
 
-	InputState() {}
-	~InputState() {}
-	InputState(const InputState&) = delete;
-	InputState& operator=(const InputState&) = delete;
+		bool m_shiftHeld{ false };
+		bool m_ctrlHeld{ false };
+		bool m_altHeld{ false };
 
-};
+		InputState() {}
+		~InputState() {}
+		InputState(const InputState&) = delete;
+		InputState& operator=(const InputState&) = delete;
+
+	};
+
+}

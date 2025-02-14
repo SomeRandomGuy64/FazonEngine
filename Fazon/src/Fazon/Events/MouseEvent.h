@@ -1,28 +1,29 @@
 #pragma once
 
 #include "Event.h"
+#include "Fazon/MouseCodes.h"
 
 namespace Fazon {
 
 	class MouseButtonEvent : public Event {
 
 	public:
-		inline uint32_t getMouseButtonCode() const { return m_mouseButtonCode - 1; }
+		inline MouseCode getMouseButtonCode() const { return m_mouseButtonCode - 1; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryMouseButton | EventCategoryInput);
 	protected:
-		MouseButtonEvent(uint32_t mouseButtonCode)
+		MouseButtonEvent(MouseCode mouseButtonCode)
 			: m_mouseButtonCode(mouseButtonCode)
 		{
 		}
 
-		uint32_t m_mouseButtonCode{};
+		MouseCode m_mouseButtonCode{};
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent {
 
 	public:
-		MouseButtonPressedEvent(uint32_t mouseButtonCode)
+		MouseButtonPressedEvent(MouseCode mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
 		}
@@ -39,7 +40,7 @@ namespace Fazon {
 	class MouseButtonReleasedEvent : public MouseButtonEvent {
 
 	public:
-		MouseButtonReleasedEvent(uint32_t mouseButtonCode)
+		MouseButtonReleasedEvent(MouseCode mouseButtonCode)
 			: MouseButtonEvent(mouseButtonCode)
 		{
 		}

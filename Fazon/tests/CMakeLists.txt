@@ -24,6 +24,7 @@ set(SPDLOG_FMT_EXTERNAL OFF CACHE BOOL "Use external fmt library instead of bund
 target_link_libraries(FazonTest PRIVATE
 	Fazon
 	spdlog
+	ImGui
 	Catch2::Catch2WithMain
 )
 
@@ -32,6 +33,16 @@ target_include_directories(FazonTest PRIVATE
 	${CMAKE_SOURCE_DIR}/Fazon/src
 	${CMAKE_SOURCE_DIR}/vendor/catch2/src
 )
+
+set(IMGUI_DIR "${CMAKE_SOURCE_DIR}/vendor/imgui")
+set(IMGUI_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/ImGui")
+set(IMGUI_BACKEND_DIR "${IMGUI_DIR}/backends")
+include_directories(${IMGUI_DIR})
+
+set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Fazon/vendor/SDL")
+set(SDL3_INCLUDE_DIR "${SDL3_DIR}/include")
+set(SDL3_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
+include_directories(${SDL3_INCLUDE_DIR})
 
 # Explicitly include Catch2's CMake module path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/vendor/catch2/extras")

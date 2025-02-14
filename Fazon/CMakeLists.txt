@@ -9,7 +9,6 @@ add_library(Fazon STATIC
 	
     src/Fazon/KeyCodes.h
 	src/Fazon/KeyCodes.cpp
-    src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
     src/Fazon/InputState.h
 
@@ -53,7 +52,6 @@ source_group("Fazon" FILES
     src/Fazon/LayerStack.h
     src/Fazon/KeyCodes.h
 	src/Fazon/KeyCodes.cpp
-    src/Fazon/ScanCodes.h
     src/Fazon/MouseCodes.h
     src/Fazon/InputState.h
 )

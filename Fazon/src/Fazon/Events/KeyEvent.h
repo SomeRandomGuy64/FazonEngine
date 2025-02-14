@@ -2,6 +2,7 @@
 
 #include "Event.h"
 #include "Fazon/InputState.h"
+#include "Fazon/KeyCodes.h"
 
 namespace Fazon {
 
@@ -57,13 +58,13 @@ namespace Fazon {
 		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode)
 		{
-			switch (keycode) {
-			case Key::KpLeftShift:
-			case Key::KpRightShift:		InputState::getInstance().setShiftHeld(false);	break;
-			case Key::KpLeftCtrl:
-			case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(false);	break;
-			case Key::KpLeftAlt:
-			case Key::KpRightAlt:		InputState::getInstance().setAltHeld(false);		break;
+				switch (keycode) {
+				case Key::KpLeftShift:
+				case Key::KpRightShift:		InputState::getInstance().setShiftHeld(false);	break;
+				case Key::KpLeftCtrl:
+				case Key::KpRightCtrl:		InputState::getInstance().setCtrlHeld(false);	break;
+				case Key::KpLeftAlt:
+				case Key::KpRightAlt:		InputState::getInstance().setAltHeld(false);	break;
 			}
 		}
 

@@ -206,11 +206,11 @@ namespace Fazon {
 	void WindowsWindow::m_mouseButtonPressEvent() {
 
 		if (m_sdlEvent.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-			MouseButtonPressedEvent event{ static_cast<uint32_t>(m_sdlEvent.button.button) };
+			MouseButtonPressedEvent event{ static_cast<MouseCode>(m_sdlEvent.button.button) };
 			m_data.EventCallback(event);
 		}
 		else if (m_sdlEvent.type == SDL_EVENT_MOUSE_BUTTON_UP) {
-			MouseButtonReleasedEvent event{ static_cast<uint32_t>(m_sdlEvent.button.button) };
+			MouseButtonReleasedEvent event{ static_cast<MouseCode>(m_sdlEvent.button.button) };
 			m_data.EventCallback(event);
 		}
 
