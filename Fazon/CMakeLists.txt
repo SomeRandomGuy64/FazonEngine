@@ -115,6 +115,11 @@ add_subdirectory(tests)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(SPDLOG_FMT_EXTERNAL OFF CACHE BOOL "Use external fmt library instead of bundled" FORCE)
+
+set(GLM_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm")
+set(GLM_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/glm")
+include_directories("${GLM_DIR}")
+
 set(SDL3_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor/SDL")
 set(SDL3_INCLUDE_DIR "${SDL3_DIR}/include")
 set(SDL3_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
@@ -133,8 +138,10 @@ include_directories(${IMGUI_DIR})
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/SDL)
 add_subdirectory(vendor/glad)
+add_subdirectory(vendor/glm)
 
 set_target_properties(spdlog PROPERTIES FOLDER "Dependencies")
+set_target_properties(glm PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL3-shared PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL_uclibc PROPERTIES FOLDER "Dependencies")
 set_target_properties(SDL3_test PROPERTIES FOLDER "Dependencies")
@@ -142,6 +149,7 @@ set_target_properties(glad PROPERTIES FOLDER "Dependencies")
 
 target_link_libraries(Fazon PUBLIC
     spdlog
+	"${GLM_LIB_DIR}/glm.lib"
     "${SDL3_LIB_DIR}/SDL3.lib"
 	"${GLAD_LIB_DIR}/glad.lib"
 	"${IMGUI_LIB_DIR}/ImGui.lib"

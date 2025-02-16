@@ -13,3 +13,6 @@
 [submodule "vendor/imgui"]
 	path = vendor/imgui
 	url = git@github.com:SomeRandomGuy64/imgui.git
+[submodule "Fazon/vendor/glm"]
+	path = Fazon/vendor/glm
+	url = git@github.com:SomeRandomGuy64/glm.git
