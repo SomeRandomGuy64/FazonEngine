@@ -19,6 +19,7 @@ target_link_libraries(Sandbox PRIVATE
     Fazon
 	spdlog
 	ImGui
+	glm
 )
 
 # Include directories
