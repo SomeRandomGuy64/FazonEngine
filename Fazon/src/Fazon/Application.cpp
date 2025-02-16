@@ -9,15 +9,18 @@ namespace Fazon {
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
-	Application* Application::s_Instance = nullptr;
+	Application* Application::s_instance = nullptr;
 
 	Application::Application() 
 	{
-		FZ_CORE_ASSERT(s_Instance == nullptr, "Application already exists!");
-		s_Instance = this;
+		FZ_CORE_ASSERT(s_instance == nullptr, "Application already exists!");
+		s_instance = this;
 
 		m_window = std::unique_ptr<Window>(Window::create());
 		m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+
+		m_imGuiLayer = new ImGuiLayer{};
+		pushLayer(m_imGuiLayer);
 	}
 
 	Application::~Application() 
@@ -60,6 +63,12 @@ namespace Fazon {
 
 			auto [x, y] { Input::getMousePos() };
 			FZ_CORE_TRACE("{0}, {1}", x, y);
+
+			m_imGuiLayer->begin();
+			for (Layer* layer : m_layerStack) {
+				layer->onImGuiRender();
+			}
+			m_imGuiLayer->end();
 			
 			m_window->onUpdate();
 

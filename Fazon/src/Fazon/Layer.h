@@ -14,6 +14,7 @@ namespace Fazon {
 		virtual void onAttach() {}
 		virtual void onDetach() {}
 		virtual void onUpdate() {}
+		virtual void onImGuiRender() {}
 		virtual void onEvent(Event&) {}
 
 		inline const std::string_view getName() const { return m_debugName; }

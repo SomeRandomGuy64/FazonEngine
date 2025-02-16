@@ -16,6 +16,14 @@ public:
 		FZ_TRACE("{0}", event);
 	}
 
+	virtual void onImGuiRender() override {
+
+		ImGui::Begin("Test");
+		ImGui::Text("Hello, world!");
+		ImGui::End();
+
+	}
+
 };
 
 class Sandbox : public Fazon::Application {
@@ -24,7 +32,6 @@ public:
 	Sandbox() 
 	{
 		//pushLayer(new ExampleLayer());
-		pushLayer(new Fazon::ImGuiLayer());
 	}
 
 	~Sandbox() 

@@ -6,6 +6,8 @@
 #include "Fazon/LayerStack.h"
 #include "Events/WindowEvent.h"
 
+#include "Fazon/ImGui/ImGuiLayer.h"
+
 namespace Fazon {
 
 	class Application {
@@ -23,17 +25,18 @@ namespace Fazon {
 
 		inline Window& getWindow() { return *m_window; }
 
-		inline static Application& get() { return *s_Instance; }
+		inline static Application& get() { return *s_instance; }
 
 	private:
 		bool m_onWindowClosed(WindowCloseEvent& event);
 
 		std::unique_ptr<Window> m_window;
+		ImGuiLayer* m_imGuiLayer;
 		bool m_running{ true };
 		LayerStack m_layerStack;
 
 	private:
-		static Application* s_Instance;
+		static Application* s_instance;
 
 	};
 

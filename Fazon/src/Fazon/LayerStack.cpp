@@ -10,6 +10,7 @@ namespace Fazon {
 	LayerStack::~LayerStack()
 	{
 		for (Layer* layer : m_layers) {
+			layer->onDetach();
 			delete layer;
 		}
 	}
@@ -27,6 +28,7 @@ namespace Fazon {
 
 		auto it{ std::find(m_layers.begin(), m_layers.end(), layer) };
 		if (it != m_layers.end()) {
+			layer->onDetach();
 			m_layers.erase(it);
 			--m_layerInsertIndex;
 		}
@@ -37,6 +39,7 @@ namespace Fazon {
 
 		auto it{ std::find(m_layers.begin(), m_layers.end(), overlay) };
 		if (it != m_layers.end()) {
+			overlay->onDetach();
 			m_layers.erase(it);
 		}
 
