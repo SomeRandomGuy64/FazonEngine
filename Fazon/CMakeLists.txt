@@ -35,6 +35,7 @@ add_library(Fazon STATIC
 
 	src/Fazon/ImGui/ImGuiLayer.h
 	src/Fazon/ImGui/ImGuiLayer.cpp
+    src/Fazon/ImGui/ImGuiBuild.cpp
 	
 	src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.cpp
     src/Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h
@@ -75,6 +76,7 @@ source_group("Fazon\\Events" FILES
 source_group("Fazon\\ImGui" FILES
 	src/Fazon/ImGui/ImGuiLayer.h
 	src/Fazon/ImGui/ImGuiLayer.cpp
+    src/Fazon/ImGui/ImGuiBuild.cpp
 )
 
 source_group("Fazon\\Platform\\Windows" FILES
