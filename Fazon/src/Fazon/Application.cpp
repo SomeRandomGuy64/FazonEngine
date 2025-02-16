@@ -61,8 +61,8 @@ namespace Fazon {
 				layer->onUpdate();
 			}
 
-			auto [x, y] { Input::getMousePos() };
-			FZ_CORE_TRACE("{0}, {1}", x, y);
+			//auto [x, y] { Input::getMousePos() };
+			//FZ_CORE_TRACE("{0}, {1}", x, y);
 
 			m_imGuiLayer->begin();
 			for (Layer* layer : m_layerStack) {
