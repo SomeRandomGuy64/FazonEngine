@@ -15,6 +15,7 @@ namespace Fazon {
 
 		void onUpdate() override;
 
+		inline const char* getTitle() const override { return m_data.title.c_str(); }
 		inline uint32_t getWidth() const override { return m_data.width; }
 		inline uint32_t getHeight() const override { return m_data.height; }
 

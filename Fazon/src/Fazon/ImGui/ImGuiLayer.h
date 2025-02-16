@@ -14,10 +14,13 @@ namespace Fazon {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void onAttach() override;
-		void onDetach() override;
-		void onUpdate() override;
-		void onEvent(Event& event) override;
+		virtual void onAttach() override;
+		virtual void onDetach() override;
+		virtual void onImGuiRender() override;
+		virtual void onEvent(Event& event) override;
+
+		void begin();
+		void end();
 
 	private:
 

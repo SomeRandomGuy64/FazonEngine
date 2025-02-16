@@ -3,8 +3,8 @@
 
 #include <SDL3/SDL.h>
 
-#include <Fazon/Platform/OpenGL/ImGuiOpenGLRenderer.h>
 #include <imgui/imgui.h>
+#include <imgui/backends/imgui_impl_opengl3.cpp>
 #include "Fazon/Application.h"
 
 namespace Fazon {
@@ -12,7 +12,7 @@ namespace Fazon {
     ImGuiKey convertFazonKeyToImguiKeyCode(KeyCode keycode);
 
 	ImGuiLayer::ImGuiLayer()
-		:Layer("ImGuiLayer")
+		: Layer("ImGuiLayer")
 	{
 	}
 
@@ -22,24 +22,30 @@ namespace Fazon {
 
 	void ImGuiLayer::onAttach() {
 
+		// Setup Dear ImGui context
+		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
-
 		ImGuiIO& io{ ImGui::GetIO() };
-		//io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		//io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableSetMousePos;
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;	// Enable Gamepad Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;		// Enable Docking
+
+		// Setup Dear ImGui style
+		ImGui::StyleColorsDark();
 
 		ImGui_ImplOpenGL3_Init("#version 460");
 
 	}
 
 	void ImGuiLayer::onDetach() {
+		
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui::DestroyContext();
 
 	}
 
-	void ImGuiLayer::onUpdate() {
+	void ImGuiLayer::begin() {
 
 		ImGuiIO& io{ ImGui::GetIO() };
 		Application& app{ Application::get() };
@@ -51,13 +57,22 @@ namespace Fazon {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
+	}
+
+	void ImGuiLayer::end() {
+
+		// Rendering
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	void ImGuiLayer::onImGuiRender() {
+
 		static bool show{ true };
 		ImGui::ShowDemoWindow(&show);
 
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 	}
+
 
 	void ImGuiLayer::onEvent(Event& event) {
 
@@ -112,8 +127,8 @@ namespace Fazon {
 
 	bool ImGuiLayer::m_onKeyPressedEvent(KeyPressedEvent& event) {
 
-        ImGuiIO& io{ ImGui::GetIO() };
-        io.AddKeyEvent(convertFazonKeyToImguiKeyCode(event.getKeyCode()), true);
+		ImGuiIO& io{ ImGui::GetIO() };
+		io.AddKeyEvent(convertFazonKeyToImguiKeyCode(event.getKeyCode()), true);
 
 		return false;
 
@@ -121,31 +136,31 @@ namespace Fazon {
 
 	bool ImGuiLayer::m_onKeyReleasedEvent(KeyReleasedEvent& event) {
 
-        ImGuiIO& io{ ImGui::GetIO() };
-        io.AddKeyEvent(convertFazonKeyToImguiKeyCode(event.getKeyCode()), false);
+		ImGuiIO& io{ ImGui::GetIO() };
+		io.AddKeyEvent(convertFazonKeyToImguiKeyCode(event.getKeyCode()), false);
 
 		return false;
 
 	}
 
-    bool ImGuiLayer::m_onKeyTypedEvent(KeyTypedEvent& event) {
-        
-        ImGuiIO& io{ ImGui::GetIO() };
-        KeyCode keycode{ event.getKeyCode() };
-        if (keycode >= 4 && keycode < 128) {
-            io.AddInputCharacter(convertFazonKeyToChar(event.getKeyCode()));
-        }
+	bool ImGuiLayer::m_onKeyTypedEvent(KeyTypedEvent& event) {
 
-        return false;
+		ImGuiIO& io{ ImGui::GetIO() };
+		KeyCode keycode{ event.getKeyCode() };
+		if (keycode >= 4 && keycode < 128) {
+			io.AddInputCharacter(convertFazonKeyToChar(event.getKeyCode()));
+		}
 
-    }
+		return false;
+
+	}
 
 	bool ImGuiLayer::m_onWindowResizedEvent(WindowResizedEvent& event) {
-        ImGuiIO& io{ ImGui::GetIO() };
-        io.DisplaySize = ImVec2{
-            static_cast<float>(event.getWidth()),
-            static_cast<float>(event.getHeight())
-        };
+		ImGuiIO& io{ ImGui::GetIO() };
+		io.DisplaySize = ImVec2{
+			static_cast<float>(event.getWidth()),
+			static_cast<float>(event.getHeight())
+		};
 
 		return false;
 	}
