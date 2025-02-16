@@ -23,7 +23,7 @@ namespace Fazon {
 		
 	private:
 		std::vector<Layer*> m_layers;
-		std::vector<Layer*>::iterator m_layerInsert;
+		uint32_t m_layerInsertIndex{ 0 };
 
 	};
 
