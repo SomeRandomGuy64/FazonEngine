@@ -35,6 +35,10 @@ namespace Fazon {
 		bool m_running{ true };
 		LayerStack m_layerStack;
 
+		uint32_t m_vao{};
+		uint32_t m_vbo{};
+		uint32_t m_ebo{};
+
 	private:
 		static Application* s_instance;
 

@@ -20,12 +20,16 @@ namespace Fazon {
 		int status{ gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) };
 		FZ_CORE_ASSERT(status, "Failed to initialise GLAD!");
 
+		FZ_CORE_INFO("  Vendor:\t{0}", (char*)glGetString(GL_VENDOR));
+		FZ_CORE_INFO("  Renderer:\t{0}", (char*)glGetString(GL_RENDERER));
+		FZ_CORE_INFO("  Version:\t{0}", (char*)glGetString(GL_VERSION));
+
 	}
 
 	void OpenGLContext::swapBuffers() {
 
 		SDL_GL_SwapWindow(m_windowHandle);
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT);
 
 	}
 
