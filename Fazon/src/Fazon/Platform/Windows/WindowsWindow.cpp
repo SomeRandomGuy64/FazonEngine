@@ -80,7 +80,7 @@ namespace Fazon {
 
 	void WindowsWindow::onUpdate() {
 
-		SDL_PollEvent(&m_sdlEvent);
+		SDL_WaitEvent(&m_sdlEvent);
 
 		// Set SDL events
 		m_resizeWindowEvent();
