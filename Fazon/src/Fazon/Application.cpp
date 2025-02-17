@@ -22,7 +22,7 @@ namespace Fazon {
 		m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		m_imGuiLayer = new ImGuiLayer{};
-		pushLayer(m_imGuiLayer);
+		pushOverlay(m_imGuiLayer);
 
 		glGenVertexArrays(1, &m_vao);
 		glBindVertexArray(m_vao);
@@ -67,7 +67,10 @@ namespace Fazon {
 	}
 
 	void Application::pushOverlay(Layer* overlay) {
+
 		m_layerStack.pushOverlay(overlay);
+		overlay->onAttach();
+
 	}
 
 	void Application::onEvent(Event& event) {
