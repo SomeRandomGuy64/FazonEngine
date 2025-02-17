@@ -42,6 +42,9 @@ add_library(Fazon STATIC
 
     src/Fazon/Renderer/RenderContext.h
     src/Fazon/Renderer/RenderContext.cpp
+
+    src/Fazon/Renderer/Shader.h
+    src/Fazon/Renderer/Shader.cpp
 	
     src/Fazon.h
 )
@@ -98,6 +101,8 @@ source_group("Fazon\\Platform\\OpenGL" FILES
 source_group("Fazon\\Renderer" FILES
     src/Fazon/Renderer/RenderContext.h
     src/Fazon/Renderer/RenderContext.cpp
+    src/Fazon/Renderer/Shader.h
+    src/Fazon/Renderer/Shader.cpp
 )
 
 # Include project-wide compiler options function

@@ -12,7 +12,7 @@ public:
 		FZ_INFO("ExampleLayer::Update");
 	}
 
-	void onEvent(Fazon::Event& event) override {
+	void onEvent([[maybe_unused]]Fazon::Event& event) override {
 		FZ_TRACE("{0}", event);
 	}
 

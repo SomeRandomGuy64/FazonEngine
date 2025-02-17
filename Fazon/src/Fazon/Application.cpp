@@ -30,16 +30,19 @@ namespace Fazon {
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-		float vertices[3 * 3]{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+		float vertices[6 * 3]{
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
 		glGenBuffers(1, &m_ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
@@ -47,6 +50,9 @@ namespace Fazon {
 		uint32_t indices[3]{ 0, 1, 2 };
 
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		m_shader = std::make_unique<Shader>("../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
+
 	}
 
 	Application::~Application() 
@@ -86,6 +92,7 @@ namespace Fazon {
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			m_shader->bind();
 			glBindVertexArray(m_vao);
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
