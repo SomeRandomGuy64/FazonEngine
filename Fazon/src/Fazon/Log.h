@@ -50,6 +50,7 @@ namespace Fazon {
 	#define FZ_ERROR(...)
 	#define FZ_WARN(...)
 	#define FZ_INFO(...)
+	#define FZ_TRACE(...)
 	#define FZ_DEBUG(...)
 #endif // !FZ_BUILD_DIST
 

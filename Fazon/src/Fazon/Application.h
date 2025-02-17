@@ -8,6 +8,8 @@
 
 #include "Fazon/ImGui/ImGuiLayer.h"
 
+#include "Fazon/Renderer/Shader.h"
+
 namespace Fazon {
 
 	class Application {
@@ -38,6 +40,7 @@ namespace Fazon {
 		uint32_t m_vao{};
 		uint32_t m_vbo{};
 		uint32_t m_ebo{};
+		std::unique_ptr<Shader> m_shader;
 
 	private:
 		static Application* s_instance;

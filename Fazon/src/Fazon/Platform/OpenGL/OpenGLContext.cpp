@@ -17,7 +17,7 @@ namespace Fazon {
 	void OpenGLContext::init() {
 
 		SDL_GL_MakeCurrent(m_windowHandle, m_glContext);
-		int status{ gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) };
+		[[maybe_unused]]int status{ gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) };
 		FZ_CORE_ASSERT(status, "Failed to initialise GLAD!");
 
 		FZ_CORE_INFO("  Vendor:\t{0}", (char*)glGetString(GL_VENDOR));
