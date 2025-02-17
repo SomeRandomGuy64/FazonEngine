@@ -89,7 +89,7 @@ namespace Fazon {
 	void Application::run() {
 		while (m_running) {
 
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+			glClearColor(0.3f, 0.3f, 0.6f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_shader->bind();
