@@ -14,6 +14,11 @@ add_library(Fazon STATIC
     src/Fazon/InputState.h
     src/Fazon/InputState.cpp
 
+    src/Fazon/Layer.cpp
+    src/Fazon/Layer.h
+    src/Fazon/LayerStack.cpp
+    src/Fazon/LayerStack.h
+
     src/Fazon/Events/ApplicationEvent.h
     src/Fazon/Events/Event.h
     src/Fazon/Events/KeyEvent.h
@@ -28,14 +33,15 @@ add_library(Fazon STATIC
     src/Fazon/Platform/Windows/WindowsInput.h
     src/Fazon/Platform/Windows/WindowsInput.cpp
 
-    src/Fazon/Layer.cpp
-    src/Fazon/Layer.h
-    src/Fazon/LayerStack.cpp
-    src/Fazon/LayerStack.h
+    src/Fazon/Platform/OpenGL/OpenGLContext.h
+    src/Fazon/Platform/OpenGL/OpenGLContext.cpp
 
 	src/Fazon/ImGui/ImGuiLayer.h
 	src/Fazon/ImGui/ImGuiLayer.cpp
     src/Fazon/ImGui/ImGuiBuild.cpp
+
+    src/Fazon/Renderer/RenderContext.h
+    src/Fazon/Renderer/RenderContext.cpp
 	
     src/Fazon.h
 )
@@ -85,6 +91,13 @@ source_group("Fazon\\Platform\\Windows" FILES
 )
 
 source_group("Fazon\\Platform\\OpenGL" FILES
+    src/Fazon/Platform/OpenGL/OpenGLContext.h
+    src/Fazon/Platform/OpenGL/OpenGLContext.cpp
+)
+
+source_group("Fazon\\Renderer" FILES
+    src/Fazon/Renderer/RenderContext.h
+    src/Fazon/Renderer/RenderContext.cpp
 )
 
 # Include project-wide compiler options function
