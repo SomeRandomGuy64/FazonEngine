@@ -3,6 +3,8 @@
 #include "Fazon/fzpch.h"
 #include "Fazon/Window.h"
 
+#include "Fazon/Renderer/RenderContext.h"
+
 #include <SDL3/SDL.h>
 
 namespace Fazon {
@@ -43,7 +45,9 @@ namespace Fazon {
 		void m_printError(const char* error) override;
 
 	private:
+
 		SDL_Window* m_window;
+		RenderContext* m_context;
 		
 		struct WindowData {
 
@@ -58,7 +62,6 @@ namespace Fazon {
 
 		WindowData m_data{};
 		SDL_Event m_sdlEvent;
-		SDL_GLContext m_glContext;
 
 	};
 

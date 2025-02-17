@@ -6,9 +6,7 @@
 #include "Fazon/Events/KeyEvent.h"
 #include "Fazon/Events/MouseEvent.h"
 
-#include <glad/glad.h>
-
-// update later to remove OpenGL specific stuff
+#include "Fazon/Platform/OpenGL/OpenGLContext.h"
 
 namespace Fazon {
 
@@ -57,30 +55,24 @@ namespace Fazon {
 			static_cast<int>(props.m_height), 
 			SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
 		);
+		m_context = new OpenGLContext{ m_window };
 
+		m_context->init();
 		
-		
-		// OpenGL specific
-		m_glContext = SDL_GL_CreateContext(m_window);
-		SDL_GL_MakeCurrent(m_window, m_glContext);
-
-		int status{ gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress) };
-		FZ_CORE_ASSERT(status, "Failed to initialise GLAD!");
-
 		m_printError(SDL_GetError());
 		setVSync(true);
 
 	}
 
 	void WindowsWindow::m_shutdown() {
-		SDL_GL_DestroyContext(m_glContext);
+		m_context->destroyContext();
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
 	}
 
 	void WindowsWindow::onUpdate() {
 
-		SDL_WaitEvent(&m_sdlEvent);
+		SDL_PollEvent(&m_sdlEvent);
 
 		// Set SDL events
 		m_resizeWindowEvent();
@@ -94,9 +86,7 @@ namespace Fazon {
 		m_mouseScrollEvent();
 		m_mouseMoveEvent();
 
-		// OpenGL specific
-		SDL_GL_SwapWindow(m_window);
-		glClear(GL_COLOR_BUFFER_BIT);
+		m_context->swapBuffers();
 
 	}
 
