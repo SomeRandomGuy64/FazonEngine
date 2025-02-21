@@ -2,9 +2,7 @@
 
 namespace Fazon {
 
-	class VertexBuffer {
-
-	public:
+	struct VertexBuffer {
 
 		virtual ~VertexBuffer() {}
 
@@ -16,9 +14,7 @@ namespace Fazon {
 	};
 
 	// Also known as the index buffer
-	class ElementBuffer {
-
-	public:
+	struct ElementBuffer {
 
 		virtual ~ElementBuffer() {}
 

@@ -5,9 +5,8 @@
 
 namespace Fazon {
 
-	class Shader {
+	struct Shader {
 
-	public:
 		virtual ~Shader() {}
 
 		virtual void bind() const = 0;
