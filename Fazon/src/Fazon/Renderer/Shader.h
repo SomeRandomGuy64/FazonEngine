@@ -27,7 +27,7 @@ namespace Fazon {
 		virtual void setMat3(glm::mat3 value) const = 0;
 		virtual void setMat4(glm::mat4 value) const = 0;
 
-		static Shader* create(const std::string& name, const std::string& vertexPath, const std::string& fragmentPath);
+		static std::unique_ptr<Shader> create(const std::string& name, const std::string& vertexPath, const std::string& fragmentPath);
 
 	};
 

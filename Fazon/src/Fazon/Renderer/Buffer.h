@@ -9,7 +9,7 @@ namespace Fazon {
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
-		static VertexBuffer* create(float* vertices, uint32_t size);
+		static std::unique_ptr<VertexBuffer> create(float* vertices, uint32_t size);
 
 	};
 
@@ -23,7 +23,7 @@ namespace Fazon {
 
 		virtual uint32_t getCount() const = 0;
 
-		static ElementBuffer* create(uint32_t* elements, uint32_t size);
+		static std::unique_ptr<ElementBuffer> create(uint32_t* elements, uint32_t size);
 
 	};
 
