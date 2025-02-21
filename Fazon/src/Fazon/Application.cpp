@@ -34,7 +34,6 @@ namespace Fazon {
 		};
 
 		m_vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
-		m_vertexBuffer->bind();
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -45,9 +44,8 @@ namespace Fazon {
 		uint32_t indices[3]{ 0, 1, 2 };
 
 		m_elementBuffer.reset(ElementBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
-		m_elementBuffer->bind();
 
-		m_shader = std::make_unique<Shader>("../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
+		m_shader.reset(Shader::create("triangle", "../../Shaders/triangle.vert", "../../Shaders/triangle.frag"));
 
 	}
 

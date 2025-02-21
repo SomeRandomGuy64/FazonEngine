@@ -39,6 +39,9 @@ add_library(Fazon STATIC
     src/Fazon/Platform/OpenGL/OpenGLBuffer.h
     src/Fazon/Platform/OpenGL/OpenGLBuffer.cpp
 
+    src/Fazon/Platform/OpenGL/OpenGLShader.h
+    src/Fazon/Platform/OpenGL/OpenGLShader.cpp
+
 	src/Fazon/ImGui/ImGuiLayer.h
 	src/Fazon/ImGui/ImGuiLayer.cpp
     src/Fazon/ImGui/ImGuiBuild.cpp
@@ -107,6 +110,8 @@ source_group("Fazon\\Platform\\OpenGL" FILES
     src/Fazon/Platform/OpenGL/OpenGLContext.cpp
     src/Fazon/Platform/OpenGL/OpenGLBuffer.h
     src/Fazon/Platform/OpenGL/OpenGLBuffer.cpp
+    src/Fazon/Platform/OpenGL/OpenGLShader.h
+    src/Fazon/Platform/OpenGL/OpenGLShader.cpp
 )
 
 source_group("Fazon\\Renderer" FILES
