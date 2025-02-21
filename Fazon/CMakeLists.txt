@@ -36,6 +36,9 @@ add_library(Fazon STATIC
     src/Fazon/Platform/OpenGL/OpenGLContext.h
     src/Fazon/Platform/OpenGL/OpenGLContext.cpp
 
+    src/Fazon/Platform/OpenGL/OpenGLBuffer.h
+    src/Fazon/Platform/OpenGL/OpenGLBuffer.cpp
+
 	src/Fazon/ImGui/ImGuiLayer.h
 	src/Fazon/ImGui/ImGuiLayer.cpp
     src/Fazon/ImGui/ImGuiBuild.cpp
@@ -43,8 +46,14 @@ add_library(Fazon STATIC
     src/Fazon/Renderer/RenderContext.h
     src/Fazon/Renderer/RenderContext.cpp
 
+    src/Fazon/Renderer/Renderer.h
+    src/Fazon/Renderer/Renderer.cpp
+
     src/Fazon/Renderer/Shader.h
     src/Fazon/Renderer/Shader.cpp
+
+    src/Fazon/Renderer/Buffer.h
+    src/Fazon/Renderer/Buffer.cpp
 	
     src/Fazon.h
 )
@@ -96,6 +105,8 @@ source_group("Fazon\\Platform\\Windows" FILES
 source_group("Fazon\\Platform\\OpenGL" FILES
     src/Fazon/Platform/OpenGL/OpenGLContext.h
     src/Fazon/Platform/OpenGL/OpenGLContext.cpp
+    src/Fazon/Platform/OpenGL/OpenGLBuffer.h
+    src/Fazon/Platform/OpenGL/OpenGLBuffer.cpp
 )
 
 source_group("Fazon\\Renderer" FILES
@@ -103,6 +114,10 @@ source_group("Fazon\\Renderer" FILES
     src/Fazon/Renderer/RenderContext.cpp
     src/Fazon/Renderer/Shader.h
     src/Fazon/Renderer/Shader.cpp
+    src/Fazon/Renderer/Buffer.h
+    src/Fazon/Renderer/Buffer.cpp
+    src/Fazon/Renderer/Renderer.h
+    src/Fazon/Renderer/Renderer.cpp
 )
 
 # Include project-wide compiler options function
