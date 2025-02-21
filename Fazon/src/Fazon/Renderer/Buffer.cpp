@@ -1,7 +1,11 @@
 #include "Buffer.h"
 #include "Fazon/fzpch.h"
 
+#ifdef FZ_PLATFORM_WINDOWS
 #include "Fazon/Platform/OpenGL/OpenGLBuffer.h"
+#elif FZ_PLATFORM_LINUX
+#include "Fazon/Platform/OpenGL/OpenGLBuffer.h"
+#endif
 
 #include "Renderer.h"
 
@@ -11,7 +15,11 @@ namespace Fazon {
 		
 		switch (Renderer::getRendererAPI()) {
 			case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
+#ifdef FZ_PLATFORM_WINDOWS
 			case RendererAPI::OpenGL:	return new OpenGLVertexBuffer{ vertices, size };
+#elif FZ_PLATFORM_LINUX
+			case RendererAPI::OpenGL:	return new OpenGLVertexBuffer{ vertices, size };
+#endif
 		};
 
 		FZ_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -23,7 +31,11 @@ namespace Fazon {
 		
 		switch (Renderer::getRendererAPI()) {
 			case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
+#ifdef FZ_PLATFORM_WINDOWS
 			case RendererAPI::OpenGL:	return new OpenGLElementBuffer{ elements, size };
+#elif FZ_PLATFORM_LINUX
+			case RendererAPI::OpenGL:	return new OpenGLElementBuffer{ elements, size };
+#endif
 		};
 
 		FZ_CORE_ASSERT(false, "Unknown RendererAPI!");
