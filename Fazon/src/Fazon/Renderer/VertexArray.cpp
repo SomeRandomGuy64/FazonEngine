@@ -11,14 +11,14 @@
 
 namespace Fazon {
 
-	std::unique_ptr<VertexArray> VertexArray::create(uint32_t size) {
+	std::unique_ptr<VertexArray> VertexArray::create() {
 		
 		switch (Renderer::getRendererAPI()) {
 			case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
 #ifdef FZ_PLATFORM_WINDOWS
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexArray>(size);
+			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexArray>();
 #elif FZ_PLATFORM_LINUX
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexArray>(size);
+			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexArray>();
 #endif
 		};
 

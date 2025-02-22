@@ -5,11 +5,8 @@
 
 namespace Fazon {
 
-	OpenGLVertexArray::OpenGLVertexArray(uint32_t size)
-		: m_size{ size }
+	OpenGLVertexArray::OpenGLVertexArray()
 	{
-		FZ_CORE_ASSERT(size >= 1 && size <= 4, "OpenGLVertexArray(); size must be greater than or equal to 1 AND smaller than or equal to 4!");
-
 		glCreateVertexArrays(1, &m_rendererID);
 		glBindVertexArray(m_rendererID);
 	}
@@ -47,7 +44,7 @@ namespace Fazon {
 
 		for (uint32_t i{ 0 }; i < 2; ++i) {
 			glEnableVertexAttribArray(i);
-			glVertexAttribPointer(i, m_size, GL_FLOAT, GL_FALSE, sizeof(m_vertexBuffer->getVertices().data()) * m_size, (void*)(i * m_size * sizeof(float)));
+			glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(m_vertexBuffer->getVertices().data()) * 3, (void*)(i * 3 * sizeof(float)));
 		}
 
 	}

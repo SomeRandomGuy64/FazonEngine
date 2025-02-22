@@ -24,18 +24,16 @@ namespace Fazon {
 		m_imGuiLayer = new ImGuiLayer{};
 		pushOverlay(m_imGuiLayer);
 
-		m_vertexArray = VertexArray::create(3);
+		m_vertexArray = VertexArray::create();
 
 		std::vector<float> vertices{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 		};
-
 		m_vertexBuffer = VertexBuffer::create(std::move(vertices), static_cast<uint32_t>(sizeof(float) * vertices.size()));
 
 		std::vector<uint32_t> indices{ 0, 1, 2 };
-
 		m_elementBuffer = ElementBuffer::create(std::move(indices), static_cast<uint32_t>(sizeof(uint32_t) * indices.size()));
 
 		m_vertexArray->setBuffers(m_vertexBuffer, m_elementBuffer);

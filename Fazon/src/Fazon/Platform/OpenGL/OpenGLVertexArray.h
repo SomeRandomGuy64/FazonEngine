@@ -8,7 +8,7 @@ namespace Fazon {
 	class OpenGLVertexArray : public VertexArray {
 
 	public:
-		OpenGLVertexArray(uint32_t size);
+		OpenGLVertexArray();
 		virtual ~OpenGLVertexArray() override;
 
 		virtual void bind() const override;
@@ -23,7 +23,6 @@ namespace Fazon {
 	private:
 
 		uint32_t m_rendererID;
-		uint32_t m_size;
 		std::shared_ptr<OpenGLVertexBuffer> m_vertexBuffer;
 		std::shared_ptr<OpenGLElementBuffer> m_elementBuffer;
 

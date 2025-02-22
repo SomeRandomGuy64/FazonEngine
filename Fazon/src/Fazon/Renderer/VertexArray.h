@@ -13,7 +13,7 @@ namespace Fazon {
 
 		virtual void setBuffers(std::shared_ptr<VertexBuffer> vertexBuffer, std::shared_ptr<ElementBuffer> elementBuffer) = 0;
 
-		static std::unique_ptr<VertexArray> create(uint32_t size);
+		static std::unique_ptr<VertexArray> create();
 
 	};
 
