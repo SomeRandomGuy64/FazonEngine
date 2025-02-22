@@ -60,3 +60,5 @@ set(SDL3_DIR "${CMAKE_SOURCE_DIR}/Fazon/vendor/SDL")
 set(SDL3_INCLUDE_DIR "${SDL3_DIR}/include")
 set(SDL3_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
 include_directories(${SDL3_INCLUDE_DIR})
+
+target_link_options(Sandbox PRIVATE "/NODEFAULTLIB:MSVCRT")
