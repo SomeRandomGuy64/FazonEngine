@@ -9,6 +9,8 @@
 #include "Fazon/ImGui/ImGuiLayer.h"
 
 #include "Fazon/Renderer/Shader.h"
+#include "Fazon/Renderer/Buffer.h"
+#include "Fazon/Renderer/VertexArray.h"
 
 namespace Fazon {
 
@@ -37,10 +39,10 @@ namespace Fazon {
 		bool m_running{ true };
 		LayerStack m_layerStack;
 
-		uint32_t m_vao{};
-		uint32_t m_vbo{};
-		uint32_t m_ebo{};
+		std::unique_ptr<VertexArray> m_vertexArray;
 		std::unique_ptr<Shader> m_shader;
+		std::shared_ptr<VertexBuffer> m_vertexBuffer;
+		std::shared_ptr<ElementBuffer> m_elementBuffer;
 
 	private:
 		static Application* s_instance;
