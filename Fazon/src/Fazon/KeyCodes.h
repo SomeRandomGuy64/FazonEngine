@@ -13,7 +13,7 @@ namespace Fazon {
     char convertFazonKeyToChar(KeyCode key);
     ImGuiKey convertFazonKeyToImguiKeyCode(KeyCode keycode);
     KeyCode convertSDLKeyToFazonKey(SDL_KeyboardEvent sdlKey);
-    SDL_Keycode converFazonKeyToSDLKey(KeyCode keycode);
+    SDL_Keycode convertFazonKeyToSDLKey(KeyCode keycode);
 
 	namespace Key {
 
