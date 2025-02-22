@@ -200,6 +200,8 @@ target_link_libraries(Fazon PUBLIC
 	"${IMGUI_LIB_DIR}/ImGui.lib"
 )
 
+target_include_directories(Fazon PUBLIC vendor/asio/include)
+
 # Hide CMake generated files
 set_target_properties(Fazon PROPERTIES 
     VS_JUST_MY_CODE_DEBUGGING ON
