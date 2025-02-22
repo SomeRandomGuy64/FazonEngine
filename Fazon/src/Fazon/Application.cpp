@@ -22,36 +22,23 @@ namespace Fazon {
 		m_window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		m_imGuiLayer = new ImGuiLayer{};
-		pushLayer(m_imGuiLayer);
+		pushOverlay(m_imGuiLayer);
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
+		m_vertexArray = VertexArray::create();
 
-		glGenBuffers(1, &m_vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-		float vertices[6 * 3]{
+		std::vector<float> vertices{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 		};
+		m_vertexBuffer = VertexBuffer::create(std::move(vertices), static_cast<uint32_t>(sizeof(float) * vertices.size()));
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		std::vector<uint32_t> indices{ 0, 1, 2 };
+		m_elementBuffer = ElementBuffer::create(std::move(indices), static_cast<uint32_t>(sizeof(uint32_t) * indices.size()));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		m_vertexArray->setBuffers(m_vertexBuffer, m_elementBuffer);
 
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-
-		glGenBuffers(1, &m_ebo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
-
-		uint32_t indices[3]{ 0, 1, 2 };
-
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-		m_shader = std::make_unique<Shader>("../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
+		m_shader = Shader::create("triangle", "../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
 
 	}
 
@@ -67,7 +54,10 @@ namespace Fazon {
 	}
 
 	void Application::pushOverlay(Layer* overlay) {
+
 		m_layerStack.pushOverlay(overlay);
+		overlay->onAttach();
+
 	}
 
 	void Application::onEvent(Event& event) {
@@ -93,8 +83,8 @@ namespace Fazon {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_shader->bind();
-			glBindVertexArray(m_vao);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			m_vertexArray->bind();
+			glDrawElements(GL_TRIANGLES, m_elementBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_layerStack) {
 				layer->onUpdate();

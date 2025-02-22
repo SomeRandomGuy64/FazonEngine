@@ -4,7 +4,7 @@
 #include <SDL3/SDL.h>
 
 #include <imgui/imgui.h>
-#include <imgui/backends/imgui_impl_opengl3.cpp>
+#include <imgui/backends/imgui_impl_opengl3.h>
 #include "Fazon/Application.h"
 
 namespace Fazon {
