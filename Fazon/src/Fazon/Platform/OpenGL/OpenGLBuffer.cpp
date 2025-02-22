@@ -9,11 +9,13 @@ namespace Fazon {
 	// Vertex Buffer ----------------------------------------------------------
 	// ------------------------------------------------------------------------
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size) 
+	OpenGLVertexBuffer::OpenGLVertexBuffer(std::vector<float>&& vertices, uint32_t size)
+		: m_vertices{ vertices }
+		, m_size{ size }
 	{
 		glCreateBuffers(1, &m_rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, size, vertices.data(), GL_STATIC_DRAW);
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -33,12 +35,13 @@ namespace Fazon {
 	// Element Buffer ---------------------------------------------------------
 	// ------------------------------------------------------------------------
 
-	OpenGLElementBuffer::OpenGLElementBuffer(uint32_t* elements, uint32_t count)
+	OpenGLElementBuffer::OpenGLElementBuffer(std::vector<uint32_t>&& elements, uint32_t count)
 		: m_count{ count }
+		, m_elements{ elements }
 	{
 		glCreateBuffers(1, &m_rendererID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), elements, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), elements.data(), GL_STATIC_DRAW);
 	}
 
 	OpenGLElementBuffer::~OpenGLElementBuffer()

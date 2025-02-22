@@ -11,14 +11,14 @@
 
 namespace Fazon {
 
-	std::unique_ptr<VertexBuffer> VertexBuffer::create(float* vertices, uint32_t size) {
+	std::shared_ptr<VertexBuffer> VertexBuffer::create(std::vector<float>&& vertices, uint32_t size) {
 		
 		switch (Renderer::getRendererAPI()) {
 			case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
 #ifdef FZ_PLATFORM_WINDOWS
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexBuffer>(vertices, size);
+			case RendererAPI::OpenGL:	return std::make_shared<OpenGLVertexBuffer>(std::move(vertices), size);
 #elif FZ_PLATFORM_LINUX
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLVertexBuffer>(vertices, size);
+			case RendererAPI::OpenGL:	return std::make_shared<OpenGLVertexBuffer>(std::move(vertices), size);
 #endif
 		};
 
@@ -27,14 +27,14 @@ namespace Fazon {
 
 	}
 
-	std::unique_ptr<ElementBuffer> ElementBuffer::create(uint32_t* elements, uint32_t size) {
+	std::shared_ptr<ElementBuffer> ElementBuffer::create(std::vector<uint32_t>&& elements, uint32_t size) {
 		
 		switch (Renderer::getRendererAPI()) {
 			case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
 #ifdef FZ_PLATFORM_WINDOWS
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLElementBuffer>(elements, size);
+			case RendererAPI::OpenGL:	return std::make_shared<OpenGLElementBuffer>(std::move(elements), size);
 #elif FZ_PLATFORM_LINUX
-			case RendererAPI::OpenGL:	return std::make_unique<OpenGLElementBuffer>(elements, size);
+			case RendererAPI::OpenGL:	return std::make_shared<OpenGLElementBuffer>(std::move(elements), size);
 #endif
 		};
 

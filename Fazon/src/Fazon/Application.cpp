@@ -24,26 +24,21 @@ namespace Fazon {
 		m_imGuiLayer = new ImGuiLayer{};
 		pushOverlay(m_imGuiLayer);
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
+		m_vertexArray = VertexArray::create(3);
 
-		float vertices[6 * 3]{
+		std::vector<float> vertices{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 		};
 
-		m_vertexBuffer = VertexBuffer::create(vertices, sizeof(vertices));
+		m_vertexBuffer = VertexBuffer::create(std::move(vertices), static_cast<uint32_t>(sizeof(float) * vertices.size()));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		std::vector<uint32_t> indices{ 0, 1, 2 };
 
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		m_elementBuffer = ElementBuffer::create(std::move(indices), static_cast<uint32_t>(sizeof(uint32_t) * indices.size()));
 
-		uint32_t indices[3]{ 0, 1, 2 };
-
-		m_elementBuffer = ElementBuffer::create(indices, sizeof(indices) / sizeof(uint32_t));
+		m_vertexArray->setBuffers(m_vertexBuffer, m_elementBuffer);
 
 		m_shader = Shader::create("triangle", "../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
 
@@ -90,7 +85,7 @@ namespace Fazon {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_shader->bind();
-			glBindVertexArray(m_vao);
+			m_vertexArray->bind();
 			glDrawElements(GL_TRIANGLES, m_elementBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_layerStack) {
