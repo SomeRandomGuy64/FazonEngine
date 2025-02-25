@@ -63,6 +63,12 @@ add_library(Fazon STATIC
 
     src/Fazon/Renderer/VertexArray.h
     src/Fazon/Renderer/VertexArray.cpp
+
+    src/Fazon/Networking/Server.h
+    src/Fazon/Networking/Server.cpp
+
+    src/Fazon/Networking/Client.h
+    src/Fazon/Networking/Client.cpp
 	
     src/Fazon.h
 )
@@ -133,6 +139,14 @@ source_group("Fazon\\Renderer" FILES
     src/Fazon/Renderer/Renderer.cpp
     src/Fazon/Renderer/VertexArray.h
     src/Fazon/Renderer/VertexArray.cpp
+)
+
+source_group("Fazon\\Networking" FILES
+    src/Fazon/Networking/Server.h
+    src/Fazon/Networking/Server.cpp
+    src/Fazon/Networking/Client.h
+    src/Fazon/Networking/Client.cpp
+
 )
 
 # Include project-wide compiler options function

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <functional>
 #include <type_traits>
+#include <thread>
 
 #include <string>
 #include <sstream>

@@ -43,8 +43,9 @@ namespace Fazon {
 		std::unique_ptr<Shader> m_shader;
 		std::shared_ptr<VertexBuffer> m_vertexBuffer;
 		std::shared_ptr<ElementBuffer> m_elementBuffer;
-
+	
 	private:
+
 		static Application* s_instance;
 
 	};
