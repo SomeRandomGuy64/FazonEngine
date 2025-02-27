@@ -5,7 +5,11 @@
 
 #include "Input.h"
 
+#include "Networking/Server.h"
+#include "Networking/Client.h"
+
 #include <glad/glad.h>
+#include <asio.hpp>
 
 namespace Fazon {
 
@@ -77,28 +81,82 @@ namespace Fazon {
 	}
 
 	void Application::run() {
-		while (m_running) {
 
-			glClearColor(0.3f, 0.3f, 0.6f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+		// ------------------------------------------------------------------------------------------------------------------------------------
+		// Temporary networking code, return to this when implementing physics, learn multi-threading and networking properly before this point
+		// ------------------------------------------------------------------------------------------------------------------------------------
 
-			m_shader->bind();
-			m_vertexArray->bind();
-			glDrawElements(GL_TRIANGLES, m_elementBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
+		try {
+			asio::io_context ioContext;
 
-			for (Layer* layer : m_layerStack) {
-				layer->onUpdate();
+			auto work{ asio::make_work_guard(ioContext) };
+
+			Server server{ ioContext, 5000 };
+
+			// Start the server in a separate thread
+			std::thread serverThread{ [&ioContext]() {
+				try {
+					ioContext.run();
+				}
+				catch (const std::exception& e) {
+					FZ_CORE_ASSERT(false, "Server thread error: {0}", e.what());
+				}
+			} };
+
+			// Create a client in the main thread
+			Client client{ ioContext, "127.0.0.1", 5000 };
+
+			// Instead of blocking here, run the io_context in a separate thread
+			std::thread clientThread{ [&ioContext]() {
+				try {
+					ioContext.run();
+				}
+				catch (const std::exception& e) {
+					FZ_CORE_ASSERT(false, "Client thread error: {0}", e.what());
+				}
+			} };
+
+			std::this_thread::sleep_for(std::chrono::seconds{ 1 });
+
+			work.reset();
+
+		// ------------------------------------------------------------------------------------------------------------------------------------
+		// Temporary networking code, return to this when implementing physics, learn multi-threading and networking properly before this point
+		// ------------------------------------------------------------------------------------------------------------------------------------
+
+			while (m_running) {
+
+				glClearColor(0.3f, 0.3f, 0.6f, 1.0f);
+				glClear(GL_COLOR_BUFFER_BIT);
+
+				m_shader->bind();
+				m_vertexArray->bind();
+				glDrawElements(GL_TRIANGLES, m_elementBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
+
+				for (Layer* layer : m_layerStack) {
+					layer->onUpdate();
+				}
+
+				m_imGuiLayer->begin();
+				for (Layer* layer : m_layerStack) {
+					layer->onImGuiRender();
+				}
+				m_imGuiLayer->end();
+				
+				m_window->onUpdate();
 			}
 
-			m_imGuiLayer->begin();
-			for (Layer* layer : m_layerStack) {
-				layer->onImGuiRender();
-			}
-			m_imGuiLayer->end();
-			
-			m_window->onUpdate();
+			// Signal threads to stop and join them before exiting
+			ioContext.stop();
+			serverThread.join();
+			clientThread.join();
 
 		}
+
+		catch (const std::exception& e) {
+			FZ_CORE_ASSERT(false, "Main error: {0}", e.what());
+		}
+
 	}
 
 	bool Application::m_onWindowClosed(WindowCloseEvent&) {
