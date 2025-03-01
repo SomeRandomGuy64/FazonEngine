@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 
-#include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Fazon {
@@ -96,17 +95,68 @@ namespace Fazon {
 		glDeleteShader(fragment);
 	}
 
-	OpenGLShader::~OpenGLShader()
+	OpenGLShader::OpenGLShader(const std::string& name, const Type shaderType, const std::string& shaderPath)
+		: m_name{ name }
+		, m_type{ shaderType }
 	{
-		glDeleteProgram(m_rendererID);
-	}
+		// 1. retrieve the shader source code from file path
+		std::string shaderSource{};
+		std::ifstream shaderFile{};
 
-	void OpenGLShader::bind() const {
-		glUseProgram(m_rendererID);
-	}
+		// ensure ifstream objects can throw exceptions:
+		shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-	void OpenGLShader::unbind() const {
-		glUseProgram(0);
+		try {
+
+			// open file
+			shaderFile.open(shaderPath);
+			std::stringstream shaderStream{};
+
+			// read the file's buffer contents into stream
+			shaderStream << shaderFile.rdbuf();
+
+			// close file handlers
+			shaderFile.close();
+
+			// convert stream into string
+			shaderSource = shaderStream.str();
+
+		}
+		catch (std::ifstream::failure e) {
+			FZ_CORE_ASSERT(false, "Shader file not successfully read!");
+		}
+
+		const char* shaderCode{ shaderSource.c_str() };
+
+		// 2. compile shader
+		uint32_t shader{ glCreateShader(GL_COMPUTE_SHADER) };
+		glShaderSource(shader, 1, &shaderCode, nullptr);
+		glCompileShader(shader);
+
+		// print compile errors if any
+		int32_t success{};
+		char infoLog[512]{};
+
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		if (!success) {
+			glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+			FZ_CORE_ASSERT(false, "Shader compilation failed: {0}", infoLog);
+		}
+
+		// shader program
+		m_rendererID = glCreateProgram();
+		glAttachShader(m_rendererID, shader);
+		glLinkProgram(m_rendererID);
+
+		// print linking errors if any
+		glGetProgramiv(m_rendererID, GL_LINK_STATUS, &success);
+		if (!success) {
+			glGetProgramInfoLog(m_rendererID, 512, nullptr, infoLog);
+			FZ_CORE_ASSERT(false, "Shader program linking failed: {0}", infoLog);
+		}
+
+		// delete shader, its linked to the program and no longer necessary
+		glDeleteShader(shader);
 	}
 
 	void OpenGLShader::setBool(bool value) const {
@@ -155,6 +205,38 @@ namespace Fazon {
 
 	void OpenGLShader::setMat4(glm::mat4 value) const {
 		glUniformMatrix4fv(glGetUniformLocation(m_rendererID, m_name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+	}
+
+	void OpenGLShader::dispatch(glm::vec3 workGroupSize) const {
+
+		if (m_type != Type::Compute) {
+			FZ_CORE_ASSERT(false, "Dispatched shader must be a compute shader!");
+			return;
+		}
+		
+		// If the shader is a compute shader
+		glUseProgram(m_rendererID);
+		glDispatchCompute(
+			static_cast<GLuint>(workGroupSize.x), 
+			static_cast<GLuint>(workGroupSize.y), 
+			static_cast<GLuint>(workGroupSize.z)
+		);
+		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+
+	}
+
+	void OpenGLShader::dispatch(uint32_t numGroupX, uint32_t numGroupY, uint32_t numGroupZ) const {
+
+		if (m_type != Type::Compute) {
+			FZ_CORE_ASSERT(false, "Dispatched shader must be a compute shader!");
+			return;
+		}
+
+		// If the shader is a compute shader
+		glUseProgram(m_rendererID);
+		glDispatchCompute(numGroupX, numGroupY, numGroupZ);
+		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+
 	}
 
 }
