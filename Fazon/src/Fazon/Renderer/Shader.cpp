@@ -18,9 +18,25 @@ namespace Fazon {
 		switch (Renderer::getRendererAPI()) {
 		case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
 #ifdef FZ_PLATFORM_WINDOWS
-		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>( name, vertexPath, fragmentPath );
+		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>(name, vertexPath, fragmentPath);
 #elif FZ_PLATFORM_LINUX
-		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>( name, vertexPath, fragmentPath );
+		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>(name, vertexPath, fragmentPath);
+#endif
+		};
+
+		FZ_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+
+	}
+
+	std::unique_ptr<Shader> Shader::create(const std::string& name, const Type shaderType, const std::string& shaderPath) {
+
+		switch (Renderer::getRendererAPI()) {
+		case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
+#ifdef FZ_PLATFORM_WINDOWS
+		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>(name, shaderType, shaderPath);
+#elif FZ_PLATFORM_LINUX
+		case RendererAPI::OpenGL:	return std::make_unique<OpenGLShader>(name, shaderType, shaderPath);
 #endif
 		};
 

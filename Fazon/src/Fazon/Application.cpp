@@ -44,6 +44,13 @@ namespace Fazon {
 
 		m_shader = Shader::create("triangle", "../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
 
+		uint32_t xElements{ 25 };
+		uint32_t yElements{ 1 };
+		uint32_t zElements{ 1 };
+
+		m_ssbo = ShaderStorageBuffer::create(xElements * yElements * zElements * sizeof(uint32_t));
+		m_computeShader = Shader::create("fibonacci", Shader::Type::Compute, "../../Shaders/comp.comp");
+
 	}
 
 	Application::~Application() 
@@ -124,10 +131,20 @@ namespace Fazon {
 		// Temporary networking code, return to this when implementing physics, learn multi-threading and networking properly before this point
 		// ------------------------------------------------------------------------------------------------------------------------------------
 
+
 			while (m_running) {
 
 				glClearColor(0.3f, 0.3f, 0.6f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
+
+				m_computeShader->dispatch(25, 1, 1);
+				m_ssbo->read(25, 1, 1, [](uint32_t* data) {
+					std::cout << "Fibonacci sequence: ";
+					for (int i{ 0 }; i < 25; ++i) {
+						std::cout << data[i] << " ";
+					}
+					std::cout << '\n';
+				});
 
 				m_shader->bind();
 				m_vertexArray->bind();

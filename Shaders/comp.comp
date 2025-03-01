@@ -1,0 +1,19 @@
+#version 460 core
+
+layout(local_size_x = 25) in;
+
+layout(std430, binding = 0) buffer OutputBuffer {
+    uint data[];
+};
+
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+
+    if (index == 0) {
+        data[index] = 0;
+    } else if (index == 1) {
+        data[index] = 1;
+    } else {
+        data[index] = data[index - 1] + data[index - 2];
+    }
+}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Fazon/Renderer/Buffer.h"
+#include <glm/vec3.hpp>
 
 namespace Fazon {
 
@@ -49,6 +50,28 @@ namespace Fazon {
 		uint32_t m_rendererID;
 		uint32_t m_count;
 		std::vector<uint32_t>& m_elements;
+
+	};
+
+	// ------------------------------------------------------------------------
+	// Shader Storage Buffer --------------------------------------------------
+	// ------------------------------------------------------------------------
+
+	class OpenGLShaderStorageBuffer : public ShaderStorageBuffer {
+
+	public:
+		OpenGLShaderStorageBuffer(uint32_t size);
+		virtual ~OpenGLShaderStorageBuffer() override;
+
+		virtual void bind() const override;
+		virtual void unbind() const override;
+		virtual void read(glm::vec3 workGroupSize, const std::function<void(uint32_t*)>& func) const override;
+		virtual void read(uint32_t numGroupX, uint32_t numGroupY, uint32_t numGroupZ, const std::function<void(uint32_t*)>& func) const override;
+
+	private:
+
+		uint32_t m_rendererID;
+		uint32_t m_size;
 
 	};
 

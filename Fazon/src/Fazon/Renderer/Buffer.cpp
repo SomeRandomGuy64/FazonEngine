@@ -43,4 +43,20 @@ namespace Fazon {
 
 	}
 
+	std::shared_ptr<ShaderStorageBuffer> ShaderStorageBuffer::create(uint32_t size) {
+
+		switch (Renderer::getRendererAPI()) {
+		case RendererAPI::None:		FZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!") return nullptr;
+#ifdef FZ_PLATFORM_WINDOWS
+		case RendererAPI::OpenGL:	return std::make_shared<OpenGLShaderStorageBuffer>(size);
+#elif FZ_PLATFORM_LINUX
+		case RendererAPI::OpenGL:	return std::make_shared<OpenGLShaderStorageBuffer>(size);
+#endif
+		};
+
+		FZ_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+
+	}
+
 }

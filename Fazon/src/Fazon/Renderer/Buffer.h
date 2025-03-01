@@ -1,10 +1,13 @@
 #pragma once
 
+#include <glm/vec3.hpp>
+
 namespace Fazon {
 
-	struct VertexBuffer {
+	class VertexBuffer {
 
-		virtual ~VertexBuffer() {}
+	public:
+		virtual ~VertexBuffer() = default;
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
@@ -17,9 +20,10 @@ namespace Fazon {
 	};
 
 	// Also known as the index buffer
-	struct ElementBuffer {
+	class ElementBuffer {
 
-		virtual ~ElementBuffer() {}
+	public:
+		virtual ~ElementBuffer() = default;
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
@@ -29,6 +33,19 @@ namespace Fazon {
 
 		static std::shared_ptr<ElementBuffer> create(std::vector<uint32_t>&& elements, uint32_t size);
 
+	};
+
+	class ShaderStorageBuffer {
+
+	public:
+		virtual ~ShaderStorageBuffer() = default;
+
+		virtual void bind() const = 0;
+		virtual void unbind() const = 0;
+		virtual void read(glm::vec3 workGroupSize, const std::function<void(uint32_t*)>& func) const = 0;
+		virtual void read(uint32_t numGroupX, uint32_t numGroupY, uint32_t numGroupZ, const std::function<void(uint32_t*)>& func) const = 0;
+
+		static std::shared_ptr<ShaderStorageBuffer> create(uint32_t size);
 	};
 
 }
