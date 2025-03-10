@@ -10,6 +10,7 @@ namespace Fazon {
 
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexPath, const std::string& fragmentPath)
 		: m_name{ name }
+		, m_type{ Type::VertFrag }
 	{
 		// 1. retrieve the vertex/fragment source code from file path
 		std::string vertexCode{};
