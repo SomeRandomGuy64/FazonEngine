@@ -94,8 +94,6 @@ namespace Fazon {
 		
 		if (data) {
 			func(data);
-
-			std::cout << '\n';
 			glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 		}
 		else {
@@ -115,8 +113,6 @@ namespace Fazon {
 
 		if (data) {
 			func(data);
-
-			std::cout << '\n';
 			glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 		}
 		else {
