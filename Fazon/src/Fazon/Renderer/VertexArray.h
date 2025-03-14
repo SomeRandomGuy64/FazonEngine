@@ -4,8 +4,9 @@
 
 namespace Fazon {
 
-	struct VertexArray {
+	class VertexArray {
 
+	public:
 		virtual ~VertexArray() {}
 
 		virtual void bind() const = 0;
