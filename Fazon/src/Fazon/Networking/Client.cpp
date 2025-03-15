@@ -17,12 +17,12 @@ namespace Fazon {
                     handleConnect(error, endpoint);
                 });
         }
-        catch (const std::exception& e) {
+        catch ([[maybe_unused]]const std::exception& e) {
             FZ_CORE_ASSERT(false, "Connection setup error: {0}", e.what());
         }
     }
 
-    void Client::handleConnect(const asio::error_code& error, const asio::ip::tcp::endpoint& endpoint) {
+    void Client::handleConnect(const asio::error_code& error, [[maybe_unused]]const asio::ip::tcp::endpoint& endpoint) {
 
         if (!error) {
             FZ_CORE_TRACE("Connected to server at {0}:{1}",

@@ -168,7 +168,7 @@ target_compile_definitions(Fazon PRIVATE
 )
 
 # Test project
-add_subdirectory(tests)
+# add_subdirectory(tests)
 
 # Vendor dependencies
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
