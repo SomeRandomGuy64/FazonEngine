@@ -105,7 +105,7 @@ namespace Fazon {
 				try {
 					ioContext.run();
 				}
-				catch (const std::exception& e) {
+				catch ([[maybe_unused]]const std::exception& e) {
 					FZ_CORE_ASSERT(false, "Server thread error: {0}", e.what());
 				}
 			} };
@@ -118,7 +118,7 @@ namespace Fazon {
 				try {
 					ioContext.run();
 				}
-				catch (const std::exception& e) {
+				catch ([[maybe_unused]]const std::exception& e) {
 					FZ_CORE_ASSERT(false, "Client thread error: {0}", e.what());
 				}
 			} };
@@ -170,7 +170,7 @@ namespace Fazon {
 
 		}
 
-		catch (const std::exception& e) {
+		catch ([[maybe_unused]]const std::exception& e) {
 			FZ_CORE_ASSERT(false, "Main error: {0}", e.what());
 		}
 
