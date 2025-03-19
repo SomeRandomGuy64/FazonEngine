@@ -160,6 +160,30 @@ namespace Fazon {
 		glDeleteShader(shader);
 	}
 
+	GLenum OpenGLShader::shaderDataTypeToOpenGLBaseType(Shader::DataType type) {
+
+		switch (type) {
+			case Fazon::Shader::DataType::None:		break;
+			case Fazon::Shader::DataType::Float:
+			case Fazon::Shader::DataType::Float2:
+			case Fazon::Shader::DataType::Float3:
+			case Fazon::Shader::DataType::Float4:	return GL_FLOAT;
+			case Fazon::Shader::DataType::Int:
+			case Fazon::Shader::DataType::Int2:
+			case Fazon::Shader::DataType::Int3:
+			case Fazon::Shader::DataType::Int4:		return GL_INT;
+			case Fazon::Shader::DataType::Bool:		return GL_BOOL;
+			case Fazon::Shader::DataType::Mat2:		return GL_FLOAT_MAT2;
+			case Fazon::Shader::DataType::Mat3:		return GL_FLOAT_MAT3;
+			case Fazon::Shader::DataType::Mat4:		return GL_FLOAT_MAT4;
+			default:								break;
+		}
+
+		FZ_CORE_ASSERT(false, "Unknown Shader Data Type!");
+		return 0;
+
+	}
+
 	void OpenGLShader::setBool(bool value) const {
 		glUniform1i(glGetUniformLocation(m_rendererID, m_name.c_str()), static_cast<int>(value));
 	}

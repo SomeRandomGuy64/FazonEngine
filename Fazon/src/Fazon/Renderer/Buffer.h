@@ -1,30 +1,27 @@
 #pragma once
 
+#include "Shader.h"
 #include <glm/vec3.hpp>
 
 namespace Fazon {
 
-	enum class ShaderDataType {
-		None = 0, Float, Float2, Float3, Float4, Int, Int2, Int3, Int4, Bool, Mat2, Mat3, Mat4
-	};
-
-	static uint32_t shaderDataTypeSize(ShaderDataType type) {
+	static uint32_t shaderDataTypeSize(Shader::DataType type) {
 
 		switch (type) {
-			case Fazon::ShaderDataType::None:	return 0;
-			case Fazon::ShaderDataType::Float:	return 4;
-			case Fazon::ShaderDataType::Float2:	return 4 * 2;
-			case Fazon::ShaderDataType::Float3: return 4 * 3;
-			case Fazon::ShaderDataType::Float4: return 4 * 4;
-			case Fazon::ShaderDataType::Int:	return 4;
-			case Fazon::ShaderDataType::Int2:	return 4 * 2;
-			case Fazon::ShaderDataType::Int3:	return 4 * 3;
-			case Fazon::ShaderDataType::Int4:	return 4 * 4;
-			case Fazon::ShaderDataType::Bool:	return 4;
-			case Fazon::ShaderDataType::Mat2:	return 4 * 2 * 2;
-			case Fazon::ShaderDataType::Mat3:	return 4 * 3 * 3;
-			case Fazon::ShaderDataType::Mat4:	return 4 * 4 * 4;
-			default:							break;
+			case Fazon::Shader::DataType::None:		return 0;
+			case Fazon::Shader::DataType::Float:	return 4;
+			case Fazon::Shader::DataType::Float2:	return 4 * 2;
+			case Fazon::Shader::DataType::Float3:	return 4 * 3;
+			case Fazon::Shader::DataType::Float4:	return 4 * 4;
+			case Fazon::Shader::DataType::Int:		return 4;
+			case Fazon::Shader::DataType::Int2:		return 4 * 2;
+			case Fazon::Shader::DataType::Int3:		return 4 * 3;
+			case Fazon::Shader::DataType::Int4:		return 4 * 4;
+			case Fazon::Shader::DataType::Bool:		return 4;
+			case Fazon::Shader::DataType::Mat2:		return 4 * 2 * 2;
+			case Fazon::Shader::DataType::Mat3:		return 4 * 3 * 3;
+			case Fazon::Shader::DataType::Mat4:		return 4 * 4 * 4;
+			default:								break;
 		}
 
 		FZ_CORE_ASSERT(false, "Unknown Shader Data Type!");
@@ -35,12 +32,12 @@ namespace Fazon {
 	struct BufferElement {
 
 		std::string name{};
-		ShaderDataType type{};
+		Shader::DataType type{};
 		uint32_t size{};
 		uint32_t offset{};
 		bool normalised{ false };
 
-		BufferElement(ShaderDataType type, const std::string& name, bool normalised = false)
+		BufferElement(Shader::DataType type, const std::string& name, bool normalised = false)
 			: type{ type }
 			, name{ name }
 			, size{ shaderDataTypeSize(type) }
@@ -53,20 +50,20 @@ namespace Fazon {
 		uint32_t getComponentCount() const {
 
 			switch (type) {
-				case Fazon::ShaderDataType::None:	return 0;
-				case Fazon::ShaderDataType::Float:	return 1;
-				case Fazon::ShaderDataType::Float2:	return 2;
-				case Fazon::ShaderDataType::Float3: return 3;
-				case Fazon::ShaderDataType::Float4: return 4;
-				case Fazon::ShaderDataType::Int:	return 1;
-				case Fazon::ShaderDataType::Int2:	return 2;
-				case Fazon::ShaderDataType::Int3:	return 3;
-				case Fazon::ShaderDataType::Int4:	return 4;
-				case Fazon::ShaderDataType::Bool:	return 1;
-				case Fazon::ShaderDataType::Mat2:	return 2 * 2;
-				case Fazon::ShaderDataType::Mat3:	return 3 * 3;
-				case Fazon::ShaderDataType::Mat4:	return 4 * 4;
-				default:							break;
+				case Fazon::Shader::DataType::None:		return 0;
+				case Fazon::Shader::DataType::Float:	return 1;
+				case Fazon::Shader::DataType::Float2:	return 2;
+				case Fazon::Shader::DataType::Float3:	return 3;
+				case Fazon::Shader::DataType::Float4:	return 4;
+				case Fazon::Shader::DataType::Int:		return 1;
+				case Fazon::Shader::DataType::Int2:		return 2;
+				case Fazon::Shader::DataType::Int3:		return 3;
+				case Fazon::Shader::DataType::Int4:		return 4;
+				case Fazon::Shader::DataType::Bool:		return 1;
+				case Fazon::Shader::DataType::Mat2:		return 2 * 2;
+				case Fazon::Shader::DataType::Mat3:		return 3 * 3;
+				case Fazon::Shader::DataType::Mat4:		return 4 * 4;
+				default:								break;
 			}
 
 			FZ_CORE_ASSERT(false, "Unknown Shader Data Type!");
