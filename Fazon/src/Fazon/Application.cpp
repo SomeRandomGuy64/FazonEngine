@@ -17,6 +17,30 @@ namespace Fazon {
 
 	Application* Application::s_instance = nullptr;
 
+	static GLenum shaderDataTypeToOpenGLBaseType(ShaderDataType type) {
+
+		switch (type) {
+			case Fazon::ShaderDataType::None:	break;
+			case Fazon::ShaderDataType::Float:	
+			case Fazon::ShaderDataType::Float2:	
+			case Fazon::ShaderDataType::Float3: 
+			case Fazon::ShaderDataType::Float4: return GL_FLOAT;
+			case Fazon::ShaderDataType::Int:	
+			case Fazon::ShaderDataType::Int2:	
+			case Fazon::ShaderDataType::Int3:	
+			case Fazon::ShaderDataType::Int4:	return GL_INT;
+			case Fazon::ShaderDataType::Bool:	return GL_BOOL;
+			case Fazon::ShaderDataType::Mat2:	return GL_FLOAT_MAT2;
+			case Fazon::ShaderDataType::Mat3:	return GL_FLOAT_MAT3;
+			case Fazon::ShaderDataType::Mat4:	return GL_FLOAT_MAT4;
+			default:							break;
+		}
+
+		FZ_CORE_ASSERT(false, "Unknown Shader Data Type!");
+		return 0;
+
+	}
+
 	Application::Application() 
 	{
 		FZ_CORE_ASSERT(s_instance == nullptr, "Application already exists!");
@@ -28,19 +52,46 @@ namespace Fazon {
 		m_imGuiLayer = new ImGuiLayer{};
 		pushOverlay(m_imGuiLayer);
 
-		m_vertexArray = VertexArray::create();
+		//m_vertexArray = VertexArray::create();
 
 		std::vector<float> vertices{
-			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
+
 		m_vertexBuffer = VertexBuffer::create(std::move(vertices), static_cast<uint32_t>(sizeof(float) * vertices.size()));
+
+		{
+			BufferLayout layout{
+				{ ShaderDataType::Float3, "aPos"},
+				{ ShaderDataType::Float4, "aCol"}
+			};
+
+			m_vertexBuffer->setLayout(layout);
+		}
+
+		const auto& layout{ m_vertexBuffer->getLayout() };
+		for (uint32_t i{ 0 }; i < layout.getElements().size(); ++i) {
+			BufferElement element{ layout.getElements().at(i)};
+			glEnableVertexAttribArray(i);
+			glVertexAttribPointer(
+				i,
+				element.getComponentCount(),
+				shaderDataTypeToOpenGLBaseType(element.type),
+				element.normalised ? GL_TRUE : GL_FALSE,
+				layout.getStride(),
+#pragma warning(push)
+#pragma warning(disable : 4312)	// disable integer to pointer conversion warning
+				(const void*)(element.offset)
+#pragma warning(pop)
+			);
+		}
 
 		std::vector<uint32_t> indices{ 0, 1, 2 };
 		m_elementBuffer = ElementBuffer::create(std::move(indices), static_cast<uint32_t>(sizeof(uint32_t) * indices.size()));
 
-		m_vertexArray->setBuffers(m_vertexBuffer, m_elementBuffer);
+		//m_vertexArray->setBuffers(m_vertexBuffer, m_elementBuffer);
 
 		m_shader = Shader::create("triangle", "../../Shaders/triangle.vert", "../../Shaders/triangle.frag");
 
@@ -147,7 +198,7 @@ namespace Fazon {
 				//});
 
 				m_shader->bind();
-				m_vertexArray->bind();
+				//m_vertexArray->bind();
 				glDrawElements(GL_TRIANGLES, m_elementBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
 				for (Layer* layer : m_layerStack) {

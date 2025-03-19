@@ -18,6 +18,9 @@ namespace Fazon {
 		virtual void bind() const override;
 		virtual void unbind() const override;
 
+		virtual const BufferLayout& getLayout() const override { return m_layout; }
+		virtual void setLayout(const BufferLayout& layout) override { m_layout = layout; }
+
 		virtual uint32_t getSize() const override { return m_size; }
 		virtual std::vector<float>& getVertices() const override { return m_vertices; }
 
@@ -26,6 +29,7 @@ namespace Fazon {
 		uint32_t m_rendererID;
 		std::vector<float>& m_vertices;
 		uint32_t m_size;
+		BufferLayout m_layout;
 
 	};
 
