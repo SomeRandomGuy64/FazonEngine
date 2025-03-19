@@ -15,6 +15,8 @@ namespace Fazon {
 
 		std::string_view getName() const { return m_name; }
 
+		static GLenum shaderDataTypeToOpenGLBaseType(Shader::DataType type);
+
 		virtual void bind() const override { glUseProgram(m_rendererID); }
 		virtual void unbind() const override { glUseProgram(0); }
 

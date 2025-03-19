@@ -45,7 +45,7 @@ namespace Fazon {
 
         if (!error) {
             std::string message;
-            std::istream is(&m_streambuf);
+            std::istream is{ &m_streambuf };
             std::getline(is, message);
 
             FZ_CORE_TRACE("Server says: {0}", message);

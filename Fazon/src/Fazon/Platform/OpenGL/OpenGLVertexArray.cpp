@@ -1,7 +1,9 @@
 #include "OpenGLVertexArray.h"
+#include "OpenGLShader.h"
 #include "Fazon/fzpch.h"
 
 #include <glad/glad.h>
+
 
 namespace Fazon {
 
@@ -24,8 +26,9 @@ namespace Fazon {
 		glBindVertexArray(0);
 	}
 
-	// create setVertexBuffer and setElementBuffer functions too
 	void OpenGLVertexArray::setBuffers(std::shared_ptr<VertexBuffer> vertexBuffer, std::shared_ptr<ElementBuffer> elementBuffer) {
+
+		glBindVertexArray(m_rendererID);
 
 		auto glVertexBuffer{ std::dynamic_pointer_cast<OpenGLVertexBuffer>(vertexBuffer) };
 		auto glElementBuffer{ std::dynamic_pointer_cast<OpenGLElementBuffer>(elementBuffer) };
@@ -36,16 +39,38 @@ namespace Fazon {
 		m_vertexBuffer = glVertexBuffer;
 		m_elementBuffer = glElementBuffer;
 
-		enableAttribArrays();
+		const auto& layout{ m_vertexBuffer->getLayout() };
+		for (uint32_t i{ 0 }; i < layout.getElements().size(); ++i) {
+			BufferElement element{ layout.getElements().at(i) };
+			glEnableVertexAttribArray(i);
+			glVertexAttribPointer(
+				i,
+				element.getComponentCount(),
+				OpenGLShader::shaderDataTypeToOpenGLBaseType(element.type),
+				element.normalised ? GL_TRUE : GL_FALSE,
+				layout.getStride(),
+#pragma warning(push)
+#pragma warning(disable : 4312)	// disable integer to pointer conversion warning
+				(const void*)(element.offset)
+#pragma warning(pop)
+			);
+		}
 
 	}
 
-	void OpenGLVertexArray::enableAttribArrays() {
+	void OpenGLVertexArray::addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) {
 
-		for (uint32_t i{ 0 }; i < 2; ++i) {
-			glEnableVertexAttribArray(i);
-			glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(m_vertexBuffer->getVertices().data()) * 3, (void*)(i * 3 * sizeof(float)));
-		}
+		auto glVertexBuffer{ std::dynamic_pointer_cast<OpenGLVertexBuffer>(buffer) };
+		FZ_CORE_ASSERT(glVertexBuffer, "OpenGLVertexArray::setBuffers() vertexBuffer is not of type OpenGLVertexBuffer!");
+		m_vertexBuffer = glVertexBuffer;
+
+	}
+
+	void OpenGLVertexArray::addElementBuffer(std::shared_ptr<ElementBuffer> buffer) {
+
+		auto glElementBuffer{ std::dynamic_pointer_cast<OpenGLElementBuffer>(buffer) };
+		FZ_CORE_ASSERT(glElementBuffer, "OpenGLVertexArray::setBuffers() elementBuffer is not of type OpenGLElementBuffer!");
+		m_elementBuffer = glElementBuffer;
 
 	}
 

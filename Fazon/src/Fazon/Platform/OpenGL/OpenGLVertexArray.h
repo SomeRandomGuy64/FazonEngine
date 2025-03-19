@@ -15,10 +15,8 @@ namespace Fazon {
 		virtual void unbind() const override;
 
 		virtual void setBuffers(std::shared_ptr<VertexBuffer> vertexBuffer, std::shared_ptr<ElementBuffer> elementBuffer) override;
-
-	private:
-
-		void enableAttribArrays();
+		virtual void addVertexBuffer(std::shared_ptr<VertexBuffer> buffer) override;
+		virtual void addElementBuffer(std::shared_ptr<ElementBuffer> buffer) override;
 
 	private:
 
